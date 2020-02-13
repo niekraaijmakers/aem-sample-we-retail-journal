@@ -16,7 +16,7 @@
                         jcr:primaryType="nt:unstructured"
                         jcr:title="We.Retail Journal (React) Template Root Policy"
                         sling:resourceType="wcm/core/components/policy/policy"
-                        components="[/libs/wcm/foundation/components/responsivegrid,/apps/we-retail-journal/components/text,/apps/we-retail-journal/components/image,group:We.Retail Journal]">
+                        components="[/libs/cq/experience-fragments/editor/components/experiencefragment,/libs/wcm/foundation/components/responsivegrid,/apps/we-retail-journal/components/text,/apps/we-retail-journal/components/image,group:We.Retail Journal]">
                         <cq:authoring jcr:primaryType="nt:unstructured">
                             <assetToComponentMapping jcr:primaryType="nt:unstructured">
                                 <image
@@ -48,6 +48,15 @@
                             sling:resourceType="wcm/core/components/policy/policy"
                             clientlibs="[wcm.foundation.components.page.responsive]"/>
                     </page>
+                    <xfpage jcr:primaryType="nt:unstructured">
+                        <default
+                                jcr:description="Default policy of the page"
+                                jcr:primaryType="nt:unstructured"
+                                jcr:title="SPA Page"
+                                sling:resourceType="wcm/core/components/policy/policy"
+                                isExperienceFragmentPage="{Boolean}true"
+                                clientlibs="[wcm.foundation.components.page.responsive]"/>
+                    </xfpage>
                     <app jcr:primaryType="nt:unstructured">
                         <default
                             jcr:description="Default policy of the App"

@@ -502,13 +502,18 @@ public class HierarchyPageImpl implements HierarchyPage {
             }
 
             ValueMap properties = pageContentPolicy.getProperties();
-
+            
             if (properties == null) {
                 continue;
             }
-
-            isRootModel = properties.containsKey(PR_IS_ROOT);
-
+    
+            if (properties.get("isExperienceFragmentPage", Boolean.FALSE )) {
+                isRootModel = true;
+            }else{
+                isRootModel = properties.containsKey(PR_IS_ROOT);
+            }
+            
+           
         } while(page != null && !isRootModel);
 
         return page;
