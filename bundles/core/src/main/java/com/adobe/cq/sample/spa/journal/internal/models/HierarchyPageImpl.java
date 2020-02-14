@@ -57,7 +57,12 @@ import com.day.cq.wcm.api.policies.ContentPolicy;
 import com.day.cq.wcm.api.policies.ContentPolicyManager;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Model(adaptables = SlingHttpServletRequest.class, adapters = {HierarchyPage.class, ContainerExporter.class}, resourceType = HierarchyPageImpl.RESOURCE_TYPE)
+@Model(adaptables = SlingHttpServletRequest.class, adapters = {HierarchyPage.class, ContainerExporter.class},
+        resourceType = {
+            HierarchyPageImpl.RESOURCE_TYPE,
+            HierarchyPageImpl.RESOURCE_TYPE_XF
+    }
+)
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class HierarchyPageImpl implements HierarchyPage {
 
@@ -65,7 +70,9 @@ public class HierarchyPageImpl implements HierarchyPage {
      * Resource type of associated with the current implementation
      */
     protected static final String RESOURCE_TYPE = "we-retail-journal/spa/components/structure/page";
-
+    
+    protected static final String RESOURCE_TYPE_XF = "we-retail-journal/spa/components/structure/xf-page";
+    
     /**
      * Request attribute key of the component context
      */
@@ -105,7 +112,7 @@ public class HierarchyPageImpl implements HierarchyPage {
      * URL extension specific to the Sling Model exporter
      */
     private static final String URL_MODEL_EXTENSION = ".model.json";
-
+    
     @Self
     private SlingHttpServletRequest request;
 

@@ -4,4 +4,4 @@
           jcr:description="Experience Fragment page for the We.Retail journal SPA"
           jcr:primaryType="cq:Component"
           jcr:title="We.Retail Journal (React) Experience Fragment"
-          sling:resourceSuperType="cq/experience-fragments/components/xfpage"/>
+          sling:resourceSuperType="we-retail-journal/spa/components/structure/xf-page"/>

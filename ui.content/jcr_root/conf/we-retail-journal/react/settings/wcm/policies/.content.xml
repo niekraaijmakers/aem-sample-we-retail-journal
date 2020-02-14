@@ -48,7 +48,7 @@
                             sling:resourceType="wcm/core/components/policy/policy"
                             clientlibs="[wcm.foundation.components.page.responsive]"/>
                     </page>
-                    <xfpage jcr:primaryType="nt:unstructured">
+                    <xf-page jcr:primaryType="nt:unstructured">
                         <default
                                 jcr:description="Default policy of the page"
                                 jcr:primaryType="nt:unstructured"
@@ -56,7 +56,7 @@
                                 sling:resourceType="wcm/core/components/policy/policy"
                                 isExperienceFragmentPage="{Boolean}true"
                                 clientlibs="[wcm.foundation.components.page.responsive]"/>
-                    </xfpage>
+                    </xf-page>
                     <app jcr:primaryType="nt:unstructured">
                         <default
                             jcr:description="Default policy of the App"
