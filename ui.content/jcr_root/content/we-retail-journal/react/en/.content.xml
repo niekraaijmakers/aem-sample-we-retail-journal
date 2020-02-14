@@ -5,8 +5,8 @@
         cq:conf="/conf/we-retail-journal/react"
         cq:lastModified="{Date}2018-03-20T22:58:03.000+01:00"
         cq:lastModifiedBy="admin"
-        cq:template="/conf/we-retail-journal/react/settings/wcm/templates/we-retail-react-app-template"
         cq:redirectTarget="/content/we-retail-journal/react/en/home"
+        cq:template="/conf/we-retail-journal/react/settings/wcm/templates/we-retail-react-app-template"
         jcr:primaryType="cq:PageContent"
         jcr:title="We.Retail Journal (English)"
         sling:resourceType="we-retail-journal/react/components/structure/app">
@@ -19,4 +19,6 @@
     </jcr:content>
     <home/>
     <blog/>
+    <experience-fragment-test/>
+    <parsys-demo/>
 </jcr:root>

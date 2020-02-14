@@ -50,12 +50,13 @@
                     </page>
                     <xf-page jcr:primaryType="nt:unstructured">
                         <default
-                                jcr:description="Default policy of the page"
-                                jcr:primaryType="nt:unstructured"
-                                jcr:title="SPA Page"
-                                sling:resourceType="wcm/core/components/policy/policy"
-                                isExperienceFragmentPage="{Boolean}true"
-                                clientlibs="[wcm.foundation.components.page.responsive]"/>
+                            jcr:description="Default policy of the page"
+                            jcr:mixinTypes="[]"
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="SPA Page"
+                            sling:resourceType="wcm/core/components/policy/policy"
+                            clientlibs="[wcm.foundation.components.page.responsive]"
+                            isExperienceFragmentPage="{Boolean}true"/>
                     </xf-page>
                     <app jcr:primaryType="nt:unstructured">
                         <default
