@@ -4,6 +4,8 @@
     <jcr:content
         cq:template="/conf/we-retail-journal/react/settings/wcm/templates/we-retail-react-xf-page-template"
         jcr:primaryType="cq:PageContent"
+        cq:xfShowInEditor="{Boolean}true"
+        cq:xfVariantType="web"
         sling:resourceType="we-retail-journal/react/components/structure/xf-page">
         <root
             jcr:primaryType="nt:unstructured"
