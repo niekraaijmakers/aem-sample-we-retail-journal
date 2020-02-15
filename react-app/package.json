@@ -5,7 +5,8 @@
   "scripts": {
     "linter": "eslint --ext .js,.jsx .",
     "linter:fix": "eslint --ext .js,.jsx . --fix",
-    "build": "npm run linter && webpack && clientlib",
+    "build": "npm run linter && webpack",
+    "build-server": "npm run linter && webpack --config webpack.server.config",
     "build:production": "npm run linter && webpack --mode=production",
     "test": "npm run build && cross-env NODE_ENV=test karma start --browsers=ChromeHeadless --single-run=true",
     "ci": "npm run test karma-ci.conf.js",
@@ -95,7 +96,7 @@
     "karma-webpack": "^3.0.5",
     "markdown-include": "^0.4.3",
     "mocha": "^5.1.0",
-    "node-fetch": "^2.2.0",
+    "cross-fetch": "^3.0.4",
     "nodemon": "^1.18.7",
     "npm-auto-version": "^1.0.0",
     "request": "^2.87.0",

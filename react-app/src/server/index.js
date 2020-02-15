@@ -14,8 +14,7 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 // Expose XMLHttpRequest globally so ModelManager can use it
-global.fetch = require('node-fetch/lib/index');
-
+import 'cross-fetch/polyfill';
 import { CustomModelClient } from "./CustomModelClient";
 import React from "react";
 import ReactDOMServer from 'react-dom/server';

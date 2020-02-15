@@ -13,7 +13,7 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-import fetch from "node-fetch";
+import fetch from 'cross-fetch';
 import { ModelClient } from '@adobe/cq-spa-page-model-manager';
 
 const FETCH_CONFIG = {
