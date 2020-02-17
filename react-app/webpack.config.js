@@ -128,7 +128,6 @@ module.exports = {
     module: {
         strictExportPresence: true,
         rules: [
-
             {
                 test: /\.js$/,
                 exclude: /node_modules/,

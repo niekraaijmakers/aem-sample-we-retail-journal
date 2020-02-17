@@ -320,11 +320,16 @@
         <dependency>
             <groupId>com.adobe.cq.sample.spa</groupId>
             <artifactId>we-retail-journal-core</artifactId>
-            <version>[1.0,2.0)</version>
+            <version>1.2.5-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.cmpn</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.annotation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

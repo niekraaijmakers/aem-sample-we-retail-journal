@@ -19,13 +19,15 @@ const path = require('path');
 const paths = require('./config/paths');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 
+const isTestEnvironment = process.env.NODE_ENV == 'test';
+const isAdobeIO = false;
 
 module.exports = {
     // Tell webpack to start bundling our app at app/index.js
-    entry: './src/server/index',
+    entry: (isAdobeIO === true) ? paths.preRenderServer: paths.appServerIndexJs,
     mode: 'development',
     target: 'node',
     // Output our app to the dist/ directory
@@ -58,10 +60,24 @@ module.exports = {
         cluster: true,
     },
 
-    // Tell webpack to run our source code through Babel
     module: {
-
+        strictExportPresence: true,
         rules: [
+            {
+                test: /\.(js|mjs|jsx)$/,
+                enforce: 'pre',
+                use: [
+                    {
+                        options: {
+                            formatter: require.resolve('react-dev-utils/eslintFormatter'),
+                            eslintPath: require.resolve('eslint'),
+
+                        },
+                        loader: require.resolve('eslint-loader'),
+                    },
+                ],
+                include: paths.appSrc,
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -69,24 +85,31 @@ module.exports = {
                 enforce: 'post'
             },
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
-            {
                 test: /\.js$/,
                 use: ["source-map-loader"],
                 enforce: "pre"
             }]
+            .concat(isTestEnvironment ? [{
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
+                use: {
+                    loader: 'istanbul-instrumenter-loader',
+                    options: { esModules: true }
+                },
+                enforce: 'post'
+            }] : [])
     },
 
     // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
     plugins: [
-        // Generate a manifest file which contains a mapping of all asset filenames
-        // to their corresponding output file so that tools can pick it up without
-        // having to parse `index.html`.
+
+        // This gives some necessary context to module not found errors, such as
+        // the requesting resource.
+        new ModuleNotFoundPlugin(paths.preRenderServer),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.EnvironmentPlugin({
+            "API_HOST": process.env.API_HOST
+        }),
         new ManifestPlugin({
             fileName: 'asset-manifest.json',
             publicPath: paths.publicPath,
@@ -96,12 +119,6 @@ module.exports = {
         // the server side.
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1,
-        }),
-
-        new ExtractTextPlugin("styles.css"),
-        new webpack.EnvironmentPlugin({
-            "API_HOST": process.env.API_HOST
-        }),
-        new CleanWebpackPlugin(['dist'])
+        })
     ]
 };
