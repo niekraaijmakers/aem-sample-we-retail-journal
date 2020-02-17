@@ -38,7 +38,7 @@ public class StaticChunkCssTagPrinter extends SlingSafeMethodsServlet {
     }
     
     private String printMainCssTag(SlingHttpServletRequest request) throws IOException, LoginException {
-        return String.format(CSS_TAG, manifestService.getManifest(request).get("site.css"));
+        return String.format(CSS_TAG, manifestService.getManifest(request).get("main.css"));
     }
     
     

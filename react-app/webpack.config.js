@@ -24,6 +24,7 @@ const getStyleLoaders = require('./config/cssloader');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const {StatsWriterPlugin} = require("webpack-stats-plugin");
 
 const useTypeScript = false;
 const shouldUseSourceMap = true;
@@ -36,8 +37,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 module.exports = {
     // Tell webpack to start bundling our app at app/index.js
-    entry: paths.appSrc,
-    mode: 'development',
+    entry: paths.appIndexJs,
     // Output our app to the dist/ directory
     output: {
         pathinfo: true,
@@ -46,7 +46,7 @@ module.exports = {
         // There are also additional JS chunk files if you use code splitting.
         chunkFilename: 'js/[name].[hash:8].js',
         // This is the URL that app is served from. We use "/" in development.
-        publicPath: paths.publicPath,
+        publicPath: paths.clientLibRelativePath,
         libraryTarget: 'commonjs2',
     },
     devServer: {
@@ -314,6 +314,10 @@ module.exports = {
 
     // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
     plugins: [
+        new StatsWriterPlugin({
+            stats: { publicPath: true, chunkGroups: true },
+            fields: ['assetsByChunkName', 'assets', 'hash', 'publicPath', 'namedChunkGroups']
+        }),
         // This gives some necessary context to module not found errors, such as
         // the requesting resource.
         new ModuleNotFoundPlugin(paths.appPath),

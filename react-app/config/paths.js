@@ -33,21 +33,25 @@ const resolveModule = (resolveFn, filePath) => {
     return resolveFn(`${filePath}.js`);
 };
 
+const clientLibRelativePath = '/etc/we-retail-journal/clientlibs/site';
+const clientLibRoot = resolveApp('../ui.apps/jcr_root' + clientLibRelativePath);
+
 module.exports = {
-    clientLibRoot: resolveApp('../ui.apps/jcr_root/etc/we-retail-journal/clientlibs/site'),
+    clientLibRoot: clientLibRoot,
     appPath: resolveApp('.'),
     appBuild: resolveApp('build'),
     appDist: resolveApp('dist'),
     serverBuild: resolveApp('serverBuild'),
     serverDist: resolveApp('dist/server'),
+    statsFile: clientLibRoot + '/stats',
     appIndexJs: resolveModule(resolveApp, 'src/index'),
     adobeIOIndex: resolveModule(resolveApp, 'src/server/adobeio'),
     appServerIndexJs: resolveModule(resolveApp, 'src/server/index'),
     appSrc: resolveApp('src'),
     appTsConfig: resolveApp('tsconfig.json'),
     appNodeModules: resolveApp('node_modules'),
-    clientLibRelativePath: '/etc/we-retail-journal/clientlibs/site',
-    publicPath: '/'
+    clientLibRelativePath: clientLibRelativePath + '/',
+    publicPath: clientLibRelativePath,
 };
 
 

@@ -32,7 +32,7 @@ public class StaticChunkScriptTagPrinter extends SlingSafeMethodsServlet {
     
         try {
             writer.append(printScriptTag(request, "bootstrap.js"));
-            writer.append(printScriptTag(request, "site.js"));
+            writer.append(printScriptTag(request, "main.js"));
         } catch (LoginException e) {
             throw new ServletException(e);
         }

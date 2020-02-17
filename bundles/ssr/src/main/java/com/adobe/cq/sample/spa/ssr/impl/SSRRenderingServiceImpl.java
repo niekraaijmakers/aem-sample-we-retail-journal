@@ -128,8 +128,9 @@ public class SSRRenderingServiceImpl implements SSRRenderingService {
        
         String pagePath = requestedPage.getExportedPath();
         String modelRootUrl = rootPage.getRootUrl();
+        String requestUrl = request.getRequestURI();
         
-        SSRParameters parameters = new SSRParameters(wcmMode, pagePath, modelRootUrl);
+        SSRParameters parameters = new SSRParameters(wcmMode, requestUrl, pagePath, modelRootUrl);
         
         SSRPayload payload = new SSRPayload();
         payload.setModel(rootPage);

@@ -22,7 +22,8 @@
     "start-aem-script": "node scripts/aempack.js",
     "aemsync": "cross-env PROXYHOST=local.we-retail-journal.com NODE_ENV=development npm-run-all -p watch-css start-aem-script",
     "aemsync-ssr": "cross-env DEVELOPSSR=true  NODE_ENV=development npm-run-all -p watch-css start-aem-script",
-    "aemsync-pub-it": "cross-env PROXYHOST=local.we-retail-journal.com AEMPORT=4503 cross-env NODE_ENV=development npm-run-all -p watch-css start-aem-script"
+    "aemsync-pub": "cross-env PROXYHOST=local.we-retail-journal.com AEMPORT=4503 cross-env NODE_ENV=development npm-run-all -p watch-css start-aem-script",
+    "aemsync-pub-ssr": "cross-env DEVELOPSSR=true PROXYHOST=local.we-retail-journal.com AEMPORT=4503 cross-env NODE_ENV=development npm-run-all -p watch-css start-aem-script"
   },
   "proxy": {
     "/content": {

@@ -23,9 +23,11 @@ public class SSRParameters {
     private final String wcmMode;
     private final String pagePath;
     private final String modelRootUrl;
+    private final String requestUrl;
     
-    public SSRParameters(String wcmMode, String pagePath, String modelRootUrl) {
+    public SSRParameters(String wcmMode, String requestUrl, String pagePath, String modelRootUrl) {
         this.wcmMode = wcmMode;
+        this.requestUrl = requestUrl;
         this.pagePath = pagePath;
         this.modelRootUrl = modelRootUrl;
     }
@@ -43,5 +45,10 @@ public class SSRParameters {
     @JsonInclude
     public String getModelRootUrl() {
         return modelRootUrl;
+    }
+    
+    @JsonInclude
+    public String getRequestUrl() {
+        return requestUrl;
     }
 }

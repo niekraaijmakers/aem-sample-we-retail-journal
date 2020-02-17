@@ -18,6 +18,7 @@
 const paths = require('./config/paths');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getStyleLoaders = require('./config/cssloader');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
@@ -46,7 +47,7 @@ module.exports = {
 
         filename: 'server.js',
         path: paths.serverBuild,
-        publicPath: '/',
+        publicPath: paths.clientLibRelativePath,
         libraryTarget: 'commonjs2',
     },
     devServer: {
@@ -196,12 +197,6 @@ module.exports = {
                             sourceMaps: false,
                         },
                     },
-                    {
-                        test: /\.js$/,
-                        exclude: /node_modules/,
-                        loader: 'babel-loader',
-                        enforce: 'post'
-                    },
 
                     // "postcss" loader applies autoprefixer to our CSS.
                     // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -324,6 +319,7 @@ module.exports = {
             // both options are optional
             filename: 'css/[name].css',
             chunkFilename: 'css/[name].chunk.css',
-        })
+        }),
+        new CleanWebpackPlugin([paths.serverBuild])
     ]
 };

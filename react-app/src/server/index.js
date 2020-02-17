@@ -24,17 +24,32 @@ import {preRender} from "./prerender";
 const exapp = express();
 //Here we are configuring express to use body-parser as middle-ware.
 exapp.use(bodyParser.urlencoded({ extended: false }));
-exapp.use(bodyParser.json());
+
 exapp.use(express.static("dist"));
+exapp.use(bodyParser.json({limit: '50mb', extended: true}));
+exapp.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-exapp.post(['/content/we-retail-journal/react*.html', '/conf/we-retail-journal/react/settings/wcm/templates*.html'], (req, res, next) => {
+exapp.post('/prerender', (req, res, next) => {
 
-    const {model, wcmMode, requestPath, requestUrl, modelRootUrl} = req.body;
+    const {model, parameters : {
+        wcmMode, pagePath, requestUrl, modelRootUrl} = {}
+    } = req.body;
 
-    preRender(model, wcmMode, requestPath, requestUrl, modelRootUrl).then((html) => {
-        res.send(html);
+    preRender(model, wcmMode, pagePath, requestUrl, requestUrl, modelRootUrl).then((payload) => {
+        res.json({
+            code: 200,
+            payload
+        });
+        res.statusCode = 200;
+        res.end()
     }).catch((error) => {
-        next(error);
+        console.log("error rendering SSR:",error);
+        res.json({
+            payload: { html: (error.stack) ? error + ' stack: ' + error.stack : error },
+            code: 500
+        });
+        res.statusCode = 500;
+        res.end();
     })
 });
 

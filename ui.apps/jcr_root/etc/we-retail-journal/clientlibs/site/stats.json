@@ -1,0 +1,167 @@
+{
+  "assetsByChunkName": {
+    "bootstrap": "js/bootstrap.e2ed1bf9.js",
+    "core": [
+      "css/core.chunk.css",
+      "js/core.e2ed1bf9.js"
+    ],
+    "main": [
+      "css/main.chunk.css",
+      "js/main.e2ed1bf9.js"
+    ],
+    "vendors~weather": "js/vendors~weather.e2ed1bf9.js",
+    "weather": [
+      "css/weather.chunk.css",
+      "js/weather.e2ed1bf9.js"
+    ]
+  },
+  "assets": [
+    {
+      "name": "css/core.chunk.css",
+      "size": 7317,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [
+        "core"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "css/main.chunk.css",
+      "size": 18054,
+      "chunks": [
+        2
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "css/weather.chunk.css",
+      "size": 3782,
+      "chunks": [
+        4
+      ],
+      "chunkNames": [
+        "weather"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "js/bootstrap.e2ed1bf9.js",
+      "size": 77490,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "bootstrap"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "js/core.e2ed1bf9.js",
+      "size": 19295,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [
+        "core"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "js/main.e2ed1bf9.js",
+      "size": 774055,
+      "chunks": [
+        2
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "js/vendors~weather.e2ed1bf9.js",
+      "size": 773774,
+      "chunks": [
+        3
+      ],
+      "chunkNames": [
+        "vendors~weather"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "js/weather.e2ed1bf9.js",
+      "size": 20802,
+      "chunks": [
+        4
+      ],
+      "chunkNames": [
+        "weather"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    }
+  ],
+  "hash": "e2ed1bf9c31ba96a4c1a",
+  "publicPath": "/etc/we-retail-journal/clientlibs/site/",
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        0,
+        2
+      ],
+      "assets": [
+        "js/bootstrap.e2ed1bf9.js",
+        "css/main.chunk.css",
+        "js/main.e2ed1bf9.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "core": {
+      "chunks": [
+        1
+      ],
+      "assets": [
+        "css/core.chunk.css",
+        "js/core.e2ed1bf9.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "weather": {
+      "chunks": [
+        3,
+        4
+      ],
+      "assets": [
+        "js/vendors~weather.e2ed1bf9.js",
+        "css/weather.chunk.css",
+        "js/weather.e2ed1bf9.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  }
+}
