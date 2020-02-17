@@ -16,38 +16,119 @@
 
 // webpack.config.js
 const path = require('path');
+const paths = require('./config/paths');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-var isTestEnvironment = process.env.NODE_ENV == 'test';
+const ManifestPlugin = require('webpack-manifest-plugin');
+const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+
+const useTypeScript = false;
+const isTestEnvironment = process.env.NODE_ENV == 'test';
+
+process.env.BABEL_ENV = process.env.NODE_ENV;
+
 
 module.exports = {
     // Tell webpack to start bundling our app at app/index.js
-    entry: './src',
+    entry: paths.appSrc,
     mode: 'development',
     // Output our app to the dist/ directory
     output: {
-        globalObject: `typeof self !== 'undefined' ? self : this`,
-        filename: isTestEnvironment ? '[name].js' : 'app.js',
-        path: path.resolve(__dirname + '/dist'),
-        publicPath: '/'
+        pathinfo: true,
+        path: paths.clientLibRoot,
+        filename: 'js/[name].[hash:8].js',
+        // There are also additional JS chunk files if you use code splitting.
+        chunkFilename: 'js/[name].[hash:8].js',
+        // This is the URL that app is served from. We use "/" in development.
+        publicPath: paths.publicPath,
+        libraryTarget: 'commonjs2',
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000,
         historyApiFallback: {
-          disableDotRule: true
+            disableDotRule: true
         }
     },
     // Emit source maps so we can debug our code in the browser
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
 
+    optimization: {
+        splitChunks: {
+            chunks: 'async',
+            minSize: 30000,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            name: true,
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
+                }
+            }
+        },
+        runtimeChunk: {
+            name: 'bootstrap',
+        },
+    },
+    resolve: {
+        // This allows you to set a fallback for where Webpack should look for modules.
+        // We placed these paths second because we want `node_modules` to "win"
+        // if there are any conflicts. This matches Node resolution mechanism.
+        // https://github.com/facebook/create-react-app/issues/253
+        // These are the reasonable defaults supported by the Node ecosystem.
+        // We also include JSX as a common component filename extension to support
+        // some tools, although we do not recommend using it, see:
+        // https://github.com/facebook/create-react-app/issues/290
+        // `web` extension prefixes have been added for better support
+        // for React Native Web.
+        extensions: paths.moduleFileExtensions
+            .map(ext => `.${ext}`)
+            .filter(ext => useTypeScript || !ext.includes('ts')),
+        alias: {
+            // Support React Native Web
+            // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+            'react-native': 'react-native-web',
+            // patch react-dom for HMR
+            'react-dom': '@hot-loader/react-dom',
+        },
+        plugins: [
+            // Adds support for installing with Plug'n'Play, leading to faster installs and adding
+            // guards against forgotten dependencies and such.
+            PnpWebpackPlugin,
+            // Prevents users from importing files from outside of src/ (or node_modules/).
+            // This often causes confusion because we only process files within src/ with babel.
+            // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+            // please link the files into your node_modules/ and let module-resolution kick in.
+            // Make sure your source files are compiled, as they will not be processed in any way.
+            // new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+            // We keep translations in public/, so it has to be disabled
+        ],
+    },
+    resolveLoader: {
+        plugins: [
+            // Also related to Plug'n'Play, but this time it tells Webpack to load its loaders
+            // from the current package.
+            PnpWebpackPlugin.moduleLoader(module),
+        ],
+    },
     // Tell webpack to run our source code through Babel
     module: {
+        strictExportPresence: true,
         rules: [
+
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -65,7 +146,8 @@ module.exports = {
                 test: /\.js$/,
                 use: ["source-map-loader"],
                 enforce: "pre"
-            }].concat(isTestEnvironment ? [{
+            }]
+            .concat(isTestEnvironment ? [{
                 test: /\.js$/,
                 include: path.resolve(__dirname, 'src'),
                 use: {
@@ -78,13 +160,24 @@ module.exports = {
 
     // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
     plugins: [
+        // This gives some necessary context to module not found errors, such as
+        // the requesting resource.
+        new ModuleNotFoundPlugin(paths.appPath),
         new ExtractTextPlugin("styles.css"),
-        new HtmlWebpackPlugin({
-            template: 'src/index.html'
-        }),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.EnvironmentPlugin({
             "API_HOST": process.env.API_HOST
         }),
-        new CleanWebpackPlugin(['dist'])
+        new ManifestPlugin({
+            fileName: 'asset-manifest.json',
+            publicPath: paths.publicPath,
+        }),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[name].chunk.css',
+        }),
+        new CleanWebpackPlugin([paths.clientLibRoot])
     ]
 };

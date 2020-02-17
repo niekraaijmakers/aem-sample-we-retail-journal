@@ -16,9 +16,11 @@
 
 // webpack.config.js
 const path = require('path');
+const paths = require('./config/paths');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 
 module.exports = {
@@ -58,6 +60,7 @@ module.exports = {
 
     // Tell webpack to run our source code through Babel
     module: {
+
         rules: [
             {
                 test: /\.js$/,
@@ -81,6 +84,20 @@ module.exports = {
 
     // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
     plugins: [
+        // Generate a manifest file which contains a mapping of all asset filenames
+        // to their corresponding output file so that tools can pick it up without
+        // having to parse `index.html`.
+        new ManifestPlugin({
+            fileName: 'asset-manifest.json',
+            publicPath: paths.publicPath,
+        }),
+
+        // Output a single chunk at most to make sure all code is loaded on
+        // the server side.
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1,
+        }),
+
         new ExtractTextPlugin("styles.css"),
         new webpack.EnvironmentPlugin({
             "API_HOST": process.env.API_HOST

@@ -29,7 +29,7 @@ const WeatherEditConfig = {
     }
 };
 
-class Weather extends Component {
+export default class Weather extends Component {
     render() {
         if (this.props.apiKey) {
             return <ReactWeather key={'react-weather' + Date.now()} 
@@ -40,4 +40,3 @@ class Weather extends Component {
     }
 }
 
-MapTo('we-retail-journal/components/weather')(Weather, WeatherEditConfig);

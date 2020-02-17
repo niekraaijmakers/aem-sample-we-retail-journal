@@ -36,7 +36,7 @@ const TextEditConfig = {
 /**
  * Text React component
  */
-class Text extends Component {
+export default class Text extends Component {
 
     get richTextContent() {
         return <div id={extractModelId(this.props.cqPath)} data-rte-editelement dangerouslySetInnerHTML={{__html:  this.props.text}}/>;
@@ -50,5 +50,3 @@ class Text extends Component {
         return this.props.richText ? this.richTextContent : this.textContent;
     }
 }
-
-MapTo('we-retail-journal/components/text')(Text, TextEditConfig);
