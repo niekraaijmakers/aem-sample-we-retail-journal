@@ -15,7 +15,6 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import React, {Component} from 'react';
 import {extractModelId} from '../Utils';
-import {MapTo} from '@adobe/cq-react-editable-components';
 
 require('./Text.css');
 

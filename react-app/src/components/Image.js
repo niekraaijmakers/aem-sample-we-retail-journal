@@ -15,23 +15,9 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import React, {Component} from 'react';
 import {extractModelId} from '../Utils';
-import {MapTo} from '@adobe/cq-react-editable-components';
 
 require('./Image.css');
 
-/**
- * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
- *
- * @type EditConfig
- */
-const ImageEditConfig = {
-
-    emptyLabel: 'Image',
-
-    isEmpty: function(props) {
-        return !props || !props.src || props.src.trim().length < 1;
-    }
-};
 
 /**
  * Expected usage of the Image Component.
@@ -41,7 +27,7 @@ const ImageEditConfig = {
  *
  * Please see the package.json for the proxy settings.
  */
-class Image extends Component {
+export default class Image extends Component {
 
     hasLink() {
         return this.props && this.props.link;
@@ -65,5 +51,3 @@ class Image extends Component {
             </div>);
     }
 }
-
-MapTo('we-retail-journal/components/image')(Image, ImageEditConfig);

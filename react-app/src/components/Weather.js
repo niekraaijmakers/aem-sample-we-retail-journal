@@ -16,7 +16,6 @@
  
 import React, {Component} from 'react';
 import ReactWeather from 'react-open-weather';
-import {MapTo} from '@adobe/cq-react-editable-components';
 
 require('./Weather.css');
 

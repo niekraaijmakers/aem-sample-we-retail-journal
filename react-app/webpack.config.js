@@ -15,21 +15,23 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 // webpack.config.js
-const path = require('path');
+
 const paths = require('./config/paths');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const getStyleLoaders = require('./config/cssloader');
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 
 const useTypeScript = false;
+const shouldUseSourceMap = true;
 const isTestEnvironment = process.env.NODE_ENV == 'test';
-
-process.env.BABEL_ENV = process.env.NODE_ENV;
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const sassRegex = /\.(scss|sass)$/;
+const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 
 module.exports = {
@@ -48,7 +50,7 @@ module.exports = {
         libraryTarget: 'commonjs2',
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: paths.clientLibRoot,
         compress: true,
         port: 9000,
         historyApiFallback: {
@@ -129,32 +131,185 @@ module.exports = {
         strictExportPresence: true,
         rules: [
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                enforce: 'post'
+                // "oneOf" will traverse all following loaders until one will
+                // match the requirements. When no loader matches it will fall
+                // back to the "file" loader at the end of the loader list.
+                oneOf: [
+
+                    {
+                        test: /\.svg/,
+                        include: /assets\/inline/,
+                        loader: require.resolve('svg-inline-loader'),
+                    },
+                    {
+                        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
+                        loader: require.resolve('url-loader'),
+                        options: {
+                            limit: 10000,
+                            name: 'static/media/[name].[hash:8].[ext]',
+                        },
+                    },
+
+                    {
+                        test: /\.(js|mjs|jsx|ts|tsx)$/,
+                        include: paths.appSrc,
+                        loader: require.resolve('babel-loader'),
+                        options: {
+                            customize: require.resolve(
+                                'babel-preset-react-app/webpack-overrides'
+                            ),
+
+                            plugins: [
+                                ['react-hot-loader/babel'],
+                                [
+                                    require.resolve('babel-plugin-named-asset-import'),
+                                    {
+                                        loaderMap: {
+                                            svg: {
+                                                ReactComponent: '@svgr/webpack?-prettier,-svgo![path]',
+                                            },
+                                        },
+                                    },
+                                ],
+                                ['universal-import'],
+                            ],
+                            // This is a feature of `babel-loader` for webpack (not Babel itself).
+                            // It enables caching results in ./node_modules/.cache/babel-loader/
+                            // directory for faster rebuilds.
+                            cacheDirectory: true,
+                            // Don't waste time on Gzipping the cache
+                            cacheCompression: false,
+                        },
+                    },
+                    // Process any JS outside of the app with Babel.
+                    // Unlike the application JS, we only compile the standard ES features.
+                    {
+                        test: /\.(js|mjs)$/,
+                        include: paths.appSrc,
+                        exclude: /@babel(?:\/|\\{1,2})runtime/,
+                        loader: require.resolve('babel-loader'),
+                        options: {
+                            babelrc: false,
+                            configFile: false,
+                            compact: false,
+                            presets: [
+                                [
+                                    require.resolve('babel-preset-react-app/dependencies'),
+                                    { helpers: true },
+                                ],
+                            ],
+                            cacheDirectory: true,
+                            // Don't waste time on Gzipping the cache
+                            cacheCompression: false,
+
+                            // If an error happens in a package, it's possible to be
+                            // because it was compiled. Thus, we don't want the browser
+                            // debugger to show the original code. Instead, the code
+                            // being evaluated would be much more helpful.
+                            sourceMaps: false,
+                        },
+                    },
+                    {
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        loader: 'babel-loader',
+                        enforce: 'post'
+                    },
+
+                    // "postcss" loader applies autoprefixer to our CSS.
+                    // "css" loader resolves paths in CSS and adds assets as dependencies.
+                    // "style" loader turns CSS into JS modules that inject <style> tags.
+                    // In production, we use a plugin to extract that CSS to a file, but
+                    // in development "style" loader enables hot editing of CSS.
+                    // By default we support CSS Modules with the extension .module.css
+                    {
+                        test: cssRegex,
+                        exclude: cssModuleRegex,
+                        loader: getStyleLoaders({
+                            importLoaders: 1,
+                            sourceMap: shouldUseSourceMap,
+                        }),
+                        // Don't consider CSS imports dead code even if the
+                        // containing package claims to have no side effects.
+                        // Remove this when webpack adds a warning or an error for this.
+                        // See https://github.com/webpack/webpack/issues/6571
+                        sideEffects: true,
+                    },
+                    // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+                    // using the extension .module.css
+                    {
+                        test: cssModuleRegex,
+                        loader: getStyleLoaders({
+                            importLoaders: 1,
+                            sourceMap: shouldUseSourceMap,
+                            modules: true,
+                            getLocalIdent: getCSSModuleLocalIdent,
+                        }),
+                    },
+                    // Opt-in support for SASS. The logic here is somewhat similar
+                    // as in the CSS routine, except that "sass-loader" runs first
+                    // to compile SASS files into CSS.
+                    // By default we support SASS Modules with the
+                    // extensions .module.scss or .module.sass
+                    {
+                        test: sassRegex,
+                        exclude: sassModuleRegex,
+                        loader: getStyleLoaders(
+                            {
+                                importLoaders: 2,
+                                sourceMap: shouldUseSourceMap,
+                            },
+                            'sass-loader'
+                        ),
+                        // Don't consider CSS imports dead code even if the
+                        // containing package claims to have no side effects.
+                        // Remove this when webpack adds a warning or an error for this.
+                        // See https://github.com/webpack/webpack/issues/6571
+                        sideEffects: true,
+                    },
+                    // Adds support for CSS Modules, but using SASS
+                    // using the extension .module.scss or .module.sass
+                    {
+                        test: sassModuleRegex,
+                        loader: getStyleLoaders(
+                            {
+                                importLoaders: 2,
+                                sourceMap: shouldUseSourceMap,
+                                modules: true,
+                                getLocalIdent: getCSSModuleLocalIdent,
+                            },
+                            'sass-loader'
+                        ),
+                    },
+                    // "file" loader makes sure those assets get served by WebpackDevServer.
+                    // When you `import` an asset, you get its (virtual) filename.
+                    // In production, they would get copied to the `build` folder.
+                    // This loader doesn't use a "test" so it will catch all modules
+                    // that fall through the other loaders.
+                    {
+                        // Exclude `js` files to keep "css" loader working as it injects
+                        // its runtime that would otherwise be processed through "file" loader.
+                        // Also exclude `html` and `json` extensions so they get processed
+                        // by webpacks internal loaders.
+                        exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+                        loader: require.resolve('file-loader'),
+                        options: {
+                            name: 'static/media/[name].[hash:8].[ext]',
+                        },
+                    },
+                ],
+            }
+        ] .concat(isTestEnvironment ? [{
+            test: /\.js$/,
+            include: paths.appSrc,
+            use: {
+                loader: 'istanbul-instrumenter-loader',
+                options: { esModules: true }
             },
-            {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
-            {
-                test: /\.js$/,
-                use: ["source-map-loader"],
-                enforce: "pre"
-            }]
-            .concat(isTestEnvironment ? [{
-                test: /\.js$/,
-                include: path.resolve(__dirname, 'src'),
-                use: {
-                    loader: 'istanbul-instrumenter-loader',
-                    options: { esModules: true }
-                },
-                enforce: 'post'
-            }] : [])
+            enforce: 'post'
+        }] : [])
+
+
     },
 
     // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
@@ -162,7 +317,6 @@ module.exports = {
         // This gives some necessary context to module not found errors, such as
         // the requesting resource.
         new ModuleNotFoundPlugin(paths.appPath),
-        new ExtractTextPlugin("styles.css"),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.EnvironmentPlugin({
             "API_HOST": process.env.API_HOST
@@ -176,7 +330,6 @@ module.exports = {
             // both options are optional
             filename: 'css/[name].css',
             chunkFilename: 'css/[name].chunk.css',
-        }),
-        new CleanWebpackPlugin([paths.clientLibRoot])
+        })
     ]
 };

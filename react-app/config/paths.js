@@ -41,7 +41,7 @@ module.exports = {
     serverBuild: resolveApp('serverBuild'),
     serverDist: resolveApp('dist/server'),
     appIndexJs: resolveModule(resolveApp, 'src/index'),
-    preRenderServer: resolveModule(resolveApp, 'src/server/prerender'),
+    adobeIOIndex: resolveModule(resolveApp, 'src/server/adobeio'),
     appServerIndexJs: resolveModule(resolveApp, 'src/server/index'),
     appSrc: resolveApp('src'),
     appTsConfig: resolveApp('tsconfig.json'),
