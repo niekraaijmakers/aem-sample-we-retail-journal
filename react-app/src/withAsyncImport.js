@@ -1,3 +1,5 @@
+import React from 'react';
+
 import universal from 'react-universal-component';
 
 const withProps = (Component, props) => {

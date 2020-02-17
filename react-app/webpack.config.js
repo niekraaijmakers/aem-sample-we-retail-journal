@@ -46,8 +46,7 @@ module.exports = {
         // There are also additional JS chunk files if you use code splitting.
         chunkFilename: 'js/[name].[hash:8].js',
         // This is the URL that app is served from. We use "/" in development.
-        publicPath: paths.clientLibRelativePath,
-        libraryTarget: 'commonjs2',
+        publicPath: paths.publicPath
     },
     devServer: {
         contentBase: paths.clientLibRoot,
