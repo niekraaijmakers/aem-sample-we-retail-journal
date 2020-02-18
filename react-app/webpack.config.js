@@ -57,7 +57,7 @@ module.exports = {
         }
     },
     // Emit source maps so we can debug our code in the browser
-    devtool: 'inline-source-map',
+    devtool: 'eval-cheap-module-source-map',
 
     optimization: {
         splitChunks: {
@@ -136,20 +136,6 @@ module.exports = {
                 oneOf: [
 
                     {
-                        test: /\.svg/,
-                        include: /assets\/inline/,
-                        loader: require.resolve('svg-inline-loader'),
-                    },
-                    {
-                        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
-                        loader: require.resolve('url-loader'),
-                        options: {
-                            limit: 10000,
-                            name: 'static/media/[name].[hash:8].[ext]',
-                        },
-                    },
-
-                    {
                         test: /\.(js|mjs|jsx|ts|tsx)$/,
                         include: paths.appSrc,
                         loader: require.resolve('babel-loader'),
@@ -180,34 +166,6 @@ module.exports = {
                             cacheCompression: false,
                         },
                     },
-                    // Process any JS outside of the app with Babel.
-                    // Unlike the application JS, we only compile the standard ES features.
-                    {
-                        test: /\.(js|mjs)$/,
-                        exclude: /@babel(?:\/|\\{1,2})runtime/,
-                        loader: require.resolve('babel-loader'),
-                        options: {
-                            babelrc: false,
-                            configFile: false,
-                            compact: false,
-                            presets: [
-                                [
-                                    require.resolve('babel-preset-react-app/dependencies'),
-                                    { helpers: true },
-                                ],
-                            ],
-                            cacheDirectory: true,
-                            // Don't waste time on Gzipping the cache
-                            cacheCompression: false,
-
-                            // If an error happens in a package, it's possible to be
-                            // because it was compiled. Thus, we don't want the browser
-                            // debugger to show the original code. Instead, the code
-                            // being evaluated would be much more helpful.
-                            sourceMaps: false,
-                        },
-                    },
-
                     // "postcss" loader applies autoprefixer to our CSS.
                     // "css" loader resolves paths in CSS and adds assets as dependencies.
                     // "style" loader turns CSS into JS modules that inject <style> tags.
