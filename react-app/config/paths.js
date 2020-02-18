@@ -39,8 +39,6 @@ const clientLibRoot = resolveApp('../ui.apps/jcr_root' + clientLibRelativePath +
 module.exports = {
     clientLibRoot: clientLibRoot,
     appPath: resolveApp('.'),
-    appBuild: resolveApp('build'),
-    appDist: resolveApp('dist'),
     serverBuild: resolveApp('serverBuild'),
     serverDist: resolveApp('dist/server'),
     statsFile: clientLibRoot + 'stats',

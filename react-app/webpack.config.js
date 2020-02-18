@@ -184,7 +184,6 @@ module.exports = {
                     // Unlike the application JS, we only compile the standard ES features.
                     {
                         test: /\.(js|mjs)$/,
-                        include: paths.appSrc,
                         exclude: /@babel(?:\/|\\{1,2})runtime/,
                         loader: require.resolve('babel-loader'),
                         options: {
@@ -207,12 +206,6 @@ module.exports = {
                             // being evaluated would be much more helpful.
                             sourceMaps: false,
                         },
-                    },
-                    {
-                        test: /\.js$/,
-                        exclude: /node_modules/,
-                        loader: 'babel-loader',
-                        enforce: 'post'
                     },
 
                     // "postcss" loader applies autoprefixer to our CSS.
@@ -331,8 +324,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: 'css/[name].css',
-            chunkFilename: 'css/[name].chunk.css',
+            filename: 'css/[name].[hash:8].css',
+            chunkFilename: 'css/[name].[hash:8].css',
         })
     ]
 };

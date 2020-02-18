@@ -14,13 +14,14 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import React from 'react';
-import {Page, MapTo, withComponentMappingContext } from "@adobe/cq-react-editable-components";
+import {Page} from "@adobe/cq-react-editable-components";
 
 // This component is a variant of a React Page component mapped to the "structure/page" resource type
 // For now, the rendering is the same as the RootPage; this is more for illustration purposes
 export default class AppPage extends Page {
 
     get containerProps() {
+
         let attrs = super.containerProps;
         attrs.className = (attrs.className || '') + ' page ' + (this.props.cssClassNames || '');
         return attrs
