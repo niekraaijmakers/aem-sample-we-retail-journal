@@ -9,6 +9,7 @@
     "linter:fix": "eslint --ext .js,.jsx . --fix",
     "build": "cross-env NODE_ENV=development webpack",
     "build-server": "cross-env NODE_ENV=development webpack --config webpack.server.config",
+    "build-adobeio": "cross-env ISADOBEIO=true NODE_ENV=development webpack --config webpack.server.config",
     "build:production": "cross-env NODE_ENV=production webpack",
     "test": "npm run build && cross-env NODE_ENV=test karma start --browsers=ChromeHeadless --single-run=true",
     "ci": "npm run test karma-ci.conf.js",
@@ -48,6 +49,8 @@
   },
   "peerDependencies": {},
   "devDependencies": {
+    "terser-webpack-plugin": "^1.4.1",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
     "eslint-plugin-react-hooks": "^1.6.1",
     "aem-clientlib-generator": "^1.4.1",
     "aempack": "1.1.1",

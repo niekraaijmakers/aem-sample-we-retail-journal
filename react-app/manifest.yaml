@@ -1,0 +1,10 @@
+packages:
+  __namespace__:
+    license: Apache-2.0
+    actions:
+      weretail:
+        function: serverBuild/prerender.js
+        web: yes
+        runtime: 'nodejs:10'
+
+

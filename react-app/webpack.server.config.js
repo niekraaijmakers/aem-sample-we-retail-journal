@@ -19,14 +19,18 @@ const paths = require('./config/paths');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const getStyleLoaders = require('./config/cssloader');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const safePostCssParser = require('postcss-safe-parser');
 
 const useTypeScript = false;
-const shouldUseSourceMap = true;
+
+
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
@@ -34,7 +38,9 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 
 const isTestEnvironment = process.env.NODE_ENV == 'test';
-const isAdobeIO = false;
+const isAdobeIO =  process.env.ISADOBEIO || false;
+
+const shouldUseSourceMap = !isAdobeIO;
 
 const entryFile = (isAdobeIO === true) ? paths.adobeIOIndex: paths.appServerIndexJs;
 module.exports = {
@@ -45,7 +51,7 @@ module.exports = {
     // Output our app to the dist/ directory
     output: {
 
-        filename: 'server.js',
+        filename: (isAdobeIO) ? 'prerender.js': 'server.js',
         path: paths.serverBuild,
         publicPath: paths.clientLibRelativePath,
         libraryTarget: 'commonjs2',
@@ -59,9 +65,57 @@ module.exports = {
         }
     },
     // Emit source maps so we can debug our code in the browser
-    devtool: 'inline-module-source-map',
+    devtool: (isAdobeIO) ? 'none' : 'inline-module-source-map',
 
-    optimization: {},
+    optimization: {
+        minimize: isAdobeIO,
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    parse: {
+                        ecma: 8,
+                    },
+                    compress: {
+                        ecma: 5,
+                        warnings: false,
+                        comparisons: false,
+                        inline: 2,
+                    },
+                    mangle: {
+                        safari10: true,
+                    },
+                    output: {
+                        ecma: 5,
+                        comments: false,
+
+                        ascii_only: true,
+                    },
+                },
+
+                parallel: true,
+                // Enable file caching
+                cache: true,
+                sourceMap: shouldUseSourceMap,
+            }),
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorOptions: {
+                    parser: safePostCssParser,
+                    map: shouldUseSourceMap
+                        ? {
+                            // `inline: false` forces the sourcemap to be output into a
+                            // separate file
+                            inline: false,
+                            // `annotation: true` appends the sourceMappingURL to the end of
+                            // the css file, helping the browser find the sourcemap
+                            annotation: true,
+                        }
+                        : false,
+                },
+            }),
+        ],
+
+
+    },
     externals: {
         express: true,
         os: true,
@@ -124,19 +178,6 @@ module.exports = {
                 // back to the "file" loader at the end of the loader list.
                 oneOf: [
 
-                    {
-                        test: /\.svg/,
-                        include: /assets\/inline/,
-                        loader: require.resolve('svg-inline-loader'),
-                    },
-                    {
-                        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
-                        loader: require.resolve('url-loader'),
-                        options: {
-                            limit: 10000,
-                            name: 'static/media/[name].[hash:8].[ext]',
-                        },
-                    },
 
                     {
                         test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -167,34 +208,6 @@ module.exports = {
                             cacheDirectory: true,
                             // Don't waste time on Gzipping the cache
                             cacheCompression: false,
-                        },
-                    },
-                    // Process any JS outside of the app with Babel.
-                    // Unlike the application JS, we only compile the standard ES features.
-                    {
-                        test: /\.(js|mjs)$/,
-                        include: paths.appSrc,
-                        exclude: /@babel(?:\/|\\{1,2})runtime/,
-                        loader: require.resolve('babel-loader'),
-                        options: {
-                            babelrc: false,
-                            configFile: false,
-                            compact: false,
-                            presets: [
-                                [
-                                    require.resolve('babel-preset-react-app/dependencies'),
-                                    { helpers: true },
-                                ],
-                            ],
-                            cacheDirectory: true,
-                            // Don't waste time on Gzipping the cache
-                            cacheCompression: false,
-
-                            // If an error happens in a package, it's possible to be
-                            // because it was compiled. Thus, we don't want the browser
-                            // debugger to show the original code. Instead, the code
-                            // being evaluated would be much more helpful.
-                            sourceMaps: false,
                         },
                     },
 
