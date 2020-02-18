@@ -51,7 +51,7 @@ module.exports = {
     // Output our app to the dist/ directory
     output: {
 
-        filename: (isAdobeIO) ? 'prerender.js': 'server.js',
+        filename: (isAdobeIO) ? 'adobeio.js': 'server.js',
         path: paths.serverBuild,
         publicPath: paths.clientLibRelativePath,
         libraryTarget: 'commonjs2',

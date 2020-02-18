@@ -3,7 +3,7 @@ packages:
     license: Apache-2.0
     actions:
       weretail:
-        function: serverBuild/prerender.js
+        function: serverBuild/adobeio.js
         web: yes
         runtime: 'nodejs:10'
 
