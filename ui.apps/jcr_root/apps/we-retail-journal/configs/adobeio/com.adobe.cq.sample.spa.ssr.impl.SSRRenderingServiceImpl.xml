@@ -3,5 +3,5 @@
           jcr:primaryType="sling:OsgiConfig"
           enabled="{Boolean}true"
           fallbackToCSR="{Boolean}true"
-          host="http://localhost:5678/prerender"
+          host="https://adobeioruntime.net/api/v1/web/youraccount/namespace/weretail"
 />
