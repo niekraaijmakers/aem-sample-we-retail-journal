@@ -27,7 +27,6 @@ const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
-const bfj = require('bfj');
 const config = getWebPackConfigPath(process.env.NODE_ENV) ;
 
 const prodServerBuild = isAdobeIo ? '../config/webpack.config.adobeio' : '../config/webpack.config.server.prod';
@@ -54,7 +53,6 @@ if (!checkRequiredFiles([ paths.appIndexJs])) {
 
 // Process CLI arguments
 const argv = process.argv.slice(2);
-const writeStatsJson = argv.indexOf('--stats') !== -1;
 
 const runCompiler = (config, previousFileSizes) => new Promise(
     (resolve, reject) => webpack(config).run((err, stats) => {
@@ -99,12 +97,6 @@ const runCompiler = (config, previousFileSizes) => new Promise(
             previousFileSizes,
             warnings: messages.warnings,
         };
-        if (writeStatsJson) {
-            return bfj
-                .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
-                .then(() => resolve(resolveArgs))
-                .catch((error) => reject(new Error(error)));
-        }
 
         return resolve(resolveArgs);
     }));
