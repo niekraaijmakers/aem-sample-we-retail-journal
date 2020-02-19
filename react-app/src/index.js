@@ -2,11 +2,9 @@ import 'react-app-polyfill/ie11';
 import 'custom-event-polyfill';
 
 import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import 'cross-fetch/polyfill';
 import 'url-polyfill';
-import 'intersection-observer';
-import 'react-hot-loader';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/main.css';
