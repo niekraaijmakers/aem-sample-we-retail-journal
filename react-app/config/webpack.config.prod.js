@@ -18,7 +18,6 @@ const getStyleLoaders = require('./styleloaders');
 
 
 const publicPath = paths.clientLibRelativePath + '/';
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
@@ -82,22 +81,11 @@ module.exports = {
                 },
                 parallel: true,
 
-                cache: true,
-                sourceMap: shouldUseSourceMap,
+                cache: true
             }),
             new OptimizeCSSAssetsPlugin({
                 cssProcessorOptions: {
-                    parser: safePostCssParser,
-                    map: shouldUseSourceMap
-                        ? {
-                            // `inline: false` forces the sourcemap to be output into a
-                            // separate file
-                            inline: false,
-                            // `annotation: true` appends the sourceMappingURL to the end of
-                            // the css file, helping the browser find the sourcemap
-                            annotation: true,
-                        }
-                    : false,
+                    parser: safePostCssParser
                 },
             }),
         ],
@@ -246,8 +234,7 @@ module.exports = {
                         test: cssRegex,
                         exclude: cssModuleRegex,
                         loader: getStyleLoaders({
-                            importLoaders: 1,
-                            sourceMap: shouldUseSourceMap,
+                            importLoaders: 1
                         }),
                         // Don't consider CSS imports dead code even if the
                         // containing package claims to have no side effects.
@@ -261,7 +248,6 @@ module.exports = {
                         test: cssModuleRegex,
                         loader: getStyleLoaders({
                             importLoaders: 1,
-                            sourceMap: shouldUseSourceMap,
                             modules: true,
                             getLocalIdent: getCSSModuleLocalIdent,
                         }),
@@ -276,8 +262,7 @@ module.exports = {
                         exclude: sassModuleRegex,
                         loader: getStyleLoaders(
                             {
-                                importLoaders: 2,
-                                sourceMap: shouldUseSourceMap,
+                                importLoaders: 2
                             },
                             'sass-loader'
                         ),
@@ -294,7 +279,6 @@ module.exports = {
                         loader: getStyleLoaders(
                             {
                                 importLoaders: 2,
-                                sourceMap: shouldUseSourceMap,
                                 modules: true,
                                 getLocalIdent: getCSSModuleLocalIdent,
                             },

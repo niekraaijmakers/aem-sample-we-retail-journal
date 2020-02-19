@@ -36,15 +36,12 @@ const serverConfig = (isProductionBuild) ? require(prodServerBuild) : require(de
 const paths = require('../config/paths');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
 
 const measureFileSizesBeforeBuild =
       FileSizeReporter.measureFileSizesBeforeBuild;
-const useYarn = fs.existsSync(paths.yarnLockFile);
 
-const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([ paths.appIndexJs])) {
@@ -121,10 +118,9 @@ function copyPublicFolder() {
     });
 }
 
-// We require that you explicitly set browsers and do not fall back to
-// browserslist defaults.
+
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
-let buildResult = checkBrowsers(paths.appPath, isInteractive)
+let buildResult = checkBrowsers(paths.appPath, false)
     .then(() => {
         // First, read the current file sizes in build directory.
         // This lets us display how much they changed later.
@@ -159,19 +155,7 @@ let buildResult = checkBrowsers(paths.appPath, isInteractive)
             console.log(chalk.green('Compiled successfully.\n'));
         }
 
-
-        const appPackage = require(paths.appPackageJson);
-        const publicUrl = paths.publicUrl;
-        const publicPath = config.output.publicPath;
-        const buildFolder = path.relative(process.cwd(), paths.appBuild);
-        printHostingInstructions(
-            appPackage,
-            publicUrl,
-            publicPath,
-            buildFolder,
-            useYarn
-        );
-        return buildResult;
+            return buildResult;
     }),
           (err) => {
               console.log(chalk.red('Failed to compile.\n'));

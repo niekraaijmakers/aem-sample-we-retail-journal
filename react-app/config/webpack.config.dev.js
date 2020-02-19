@@ -39,8 +39,6 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-// Source maps are resource heavy and can cause out of memory issue for large source files.
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -184,7 +182,6 @@ module.exports = {
                             ],
 
                             cacheDirectory: true,
-                            // Don't waste time on Gzipping the cache
                             cacheCompression: false,
                         },
                     },
@@ -205,7 +202,6 @@ module.exports = {
                                 ],
                             ],
                             cacheDirectory: true,
-                            // Don't waste time on Gzipping the cache
                             cacheCompression: false,
                             sourceMaps: false,
                         },
@@ -215,8 +211,7 @@ module.exports = {
                         test: cssRegex,
                         exclude: cssModuleRegex,
                         loader: getStyleLoaders({
-                            importLoaders: 1,
-                            sourceMap: shouldUseSourceMap,
+                            importLoaders: 1
                         }),
 
                         sideEffects: true,
@@ -226,7 +221,6 @@ module.exports = {
                         test: cssModuleRegex,
                         loader: getStyleLoaders({
                             importLoaders: 1,
-                            sourceMap: shouldUseSourceMap,
                             modules: true,
                             getLocalIdent: getCSSModuleLocalIdent,
                         }),
@@ -237,8 +231,7 @@ module.exports = {
                         exclude: sassModuleRegex,
                         loader: getStyleLoaders(
                             {
-                                importLoaders: 2,
-                                sourceMap: shouldUseSourceMap,
+                                importLoaders: 2
                             },
                             'sass-loader'
                         ),
@@ -250,7 +243,6 @@ module.exports = {
                         loader: getStyleLoaders(
                             {
                                 importLoaders: 2,
-                                sourceMap: shouldUseSourceMap,
                                 modules: true,
                                 getLocalIdent: getCSSModuleLocalIdent,
                             },
