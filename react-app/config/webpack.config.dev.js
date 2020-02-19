@@ -279,7 +279,6 @@ module.exports = {
             chunkFilename: 'static/css/[name].chunk.css',
         }),
         // This is necessary to emit hot updates (currently CSS only):
-        new webpack.HotModuleReplacementPlugin(),
         new CaseSensitivePathsPlugin(),
         new WatchMissingNodeModulesPlugin(paths.appNodeModules),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
