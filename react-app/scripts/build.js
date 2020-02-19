@@ -23,7 +23,7 @@ const getWebPackConfigPath = (env) => {
     }
 };
 
-const path = require('path');
+
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
@@ -111,13 +111,6 @@ function build(previousFileSizes) {
     });
 }
 
-function copyPublicFolder() {
-    fs.copySync(paths.appPublic, paths.appBuild, {
-        dereference: true,
-        filter: file => file !== paths.appHtml,
-    });
-}
-
 
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 let buildResult = checkBrowsers(paths.appPath, false)
@@ -130,8 +123,6 @@ let buildResult = checkBrowsers(paths.appPath, false)
         // Remove all content but keep the directory so that
         // if you're in it, you don't end up in Trash
         fs.emptyDirSync(paths.appBuild);
-        // Merge with the public folder
-        copyPublicFolder();
         // Start the webpack build
         return build(previousFileSizes);
     })

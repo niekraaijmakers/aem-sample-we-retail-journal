@@ -72,23 +72,15 @@ module.exports = {
     appPath: resolveApp('.'),
     appBuild: resolveApp('build'),
     appDist: resolveApp('dist'),
-    appBuildI18n: resolveApp('build/i18n'),
     serverBuild: resolveApp('serverBuild'),
     serverDist: resolveApp('dist/server'),
-    appPublic: resolveApp('public'),
-    appHtml: resolveApp('public/index.html'),
     appIndexJs: resolveModule(resolveApp, 'src/index'),
     preRenderServer: resolveModule(resolveApp, 'src/server/adobeio'),
     appServerIndexJs: resolveModule(resolveApp, 'src/server/index'),
     appPackageJson: resolveApp('package.json'),
     appSrc: resolveApp('src'),
-    appTsConfig: resolveApp('tsconfig.json'),
-    yarnLockFile: resolveApp('yarn.lock'),
-    testsSetup: resolveModule(resolveApp, 'src/setupTests'),
-    proxySetup: resolveApp('src/setupProxy.js'),
     appNodeModules: resolveApp('node_modules'),
     publicUrl: getPublicUrl(resolveApp('package.json')),
-    servedPath: getServedPath(resolveApp('package.json')),
     clientLibRelativePath: '/etc/we-retail-journal/clientlibs/site'
 
 };
