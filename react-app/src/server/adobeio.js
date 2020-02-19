@@ -1,6 +1,9 @@
-import {preRender} from "./prerender";
+import preRender from "./prerender";
 
-global.main = ({model, wcmMode, requestPath, requestUrl, modelRootUrl}) => {
+global.main = ({model, parameters}) => {
+
+    const {wcmMode, requestPath, requestUrl, modelRootUrl} = parameters;
+
     return new Promise((resolve, reject) => {
         preRender(model, wcmMode, requestPath, requestUrl, modelRootUrl).then((html) => {
             resolve({

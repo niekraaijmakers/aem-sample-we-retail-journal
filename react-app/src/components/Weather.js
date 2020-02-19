@@ -17,16 +17,8 @@
 import React, {Component} from 'react';
 import ReactWeather from 'react-open-weather';
 
-require('./Weather.css');
 
-const WeatherEditConfig = {
 
-    emptyLabel: 'Weather',
-
-    isEmpty: function(props) {
-        return !props.city || props.city.trim().length < 1;
-    }
-};
 
 export default class Weather extends Component {
     render() {

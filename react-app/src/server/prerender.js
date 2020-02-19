@@ -14,15 +14,16 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import React from "react";
+import 'cross-fetch/polyfill';
+
 import ReactDOMServer from 'react-dom/server';
 import App from "../App";
 import { StaticRouter } from "react-router-dom";
 import { Constants, EditorContext } from '@adobe/cq-react-editable-components';
 import { ModelClient, ModelManager } from '@adobe/cq-spa-page-model-manager';
-import {webpackExistingChunks} from '../../constants/webpackBuildStats';
-import '../ImportComponents';
+import {webpackExistingChunks} from './constants/webpackBuildStats';
 import {ReportChunks} from "react-universal-component";
-
+import {clearChunks} from 'react-universal-component/server';
 
 /**
  * Renders a valid model to a html stringify
@@ -37,13 +38,21 @@ import {ReportChunks} from "react-universal-component";
  */
 const renderModelToHTMLString = (model, pagePath, requestUrl, requestPath, pageModelRootPath, isInEditor) => {
 
-    let rawChunkNames = [];
+    require('../ImportComponents');
 
+    clearChunks();
+    let rawChunkNames = [];
     const html = ReactDOMServer.renderToString(
         <ReportChunks report={chunkName => rawChunkNames.push(chunkName)}>
             <StaticRouter location={ requestUrl } context={{}}>
                 <EditorContext.Provider value={isInEditor}>
-                    <App cqChildren={model[Constants.CHILDREN_PROP]} cqItems={model[Constants.ITEMS_PROP]} cqItemsOrder={model[Constants.ITEMS_ORDER_PROP]} cqPath={pageModelRootPath} locationPathname={requestPath}/>
+                    <App
+                        cqChildren={model[Constants.CHILDREN_PROP]}
+                        cqItems={model[Constants.ITEMS_PROP]}
+                        cqItemsOrder={model[Constants.ITEMS_ORDER_PROP]}
+                        cqPath={pageModelRootPath}
+                        locationPathname={requestPath}
+                    />
                 </EditorContext.Provider>
             </StaticRouter>
         </ReportChunks>
@@ -59,7 +68,7 @@ const renderModelToHTMLString = (model, pagePath, requestUrl, requestPath, pageM
 
     const rendered = `${html}
         <script type="application/json" id="__INITIAL_STATE__">
-            ${stateStr}
+            window.__AEM_STATE__=${stateStr};\\
         </script>`;
 
     const chunkNames = Array.from(new Set(  rawChunkNames.map((chunk) => String(chunk).replace(/-/g, '/'))
@@ -67,21 +76,22 @@ const renderModelToHTMLString = (model, pagePath, requestUrl, requestPath, pageM
 
     return {
         html: rendered,
-        chunkNames
+        chunkNames: rawChunkNames
     }
 };
 
-export const preRender = (model, wcmMode, requestPath, requestUrl, modelRootUrl) => {
+const preRender = (model, wcmMode, requestPath, requestUrl, modelRootUrl) => {
     return new Promise((resolve, reject) => {
 
         const isInEditor = wcmMode && wcmMode === 'EDIT' || wcmMode === 'PREVIEW';
         const pagePath = requestPath.replace('.html', '');
 
-        return ModelManager.initialize({path: modelRootUrl, model: model, modelClient: ModelClient}).then((model) => {
-            resolve(renderModelToHTMLString(model, pagePath, requestUrl, requestPath, modelRootUrl, isInEditor));
+        return ModelManager.initialize({path: "/content/we-retail-journal/react/en/", model: model, modelClient: ModelClient}).then((model) => {
+             resolve(renderModelToHTMLString(model, pagePath, requestUrl, requestPath, modelRootUrl, isInEditor));
         }).catch((error) => {
             reject(error);
         });
     });
 };
 
+export default preRender;

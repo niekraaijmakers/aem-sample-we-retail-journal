@@ -16,7 +16,6 @@
 import React, {Component} from 'react';
 import {extractModelId} from '../Utils';
 
-require('./Text.css');
 
 /**
  * Default Edit configuration for the Text component that interact with the Core Text component and sub-types

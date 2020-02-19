@@ -15,7 +15,7 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import {MapTo, withComponentMappingContext} from "@adobe/cq-react-editable-components";
 import editConfigs from "./editConfigs";
-import withAsyncImport from "./withAsyncImport";
+import withAsyncImport from "./utilities/withAsyncImport";
 
 import Navigation from "./components/Navigation";
 import AppPage from "./components/Page";

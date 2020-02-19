@@ -14,10 +14,8 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import React, {Component} from 'react';
-import {MapTo} from '@adobe/cq-react-editable-components';
 import {Link} from "react-router-dom";
 
-require('./Navigation.css');
 
 export default class Navigation extends Component {
 

@@ -14,12 +14,12 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 // Expose XMLHttpRequest globally so ModelManager can use it
-import 'cross-fetch/polyfill';
+
 import React from "react";
 import express from "express";
 import bodyParser from "body-parser";
 
-import {preRender} from "./prerender";
+import preRender from "./prerender";
 
 const exapp = express();
 //Here we are configuring express to use body-parser as middle-ware.
@@ -31,8 +31,14 @@ exapp.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 exapp.post('/prerender', (req, res, next) => {
 
-    const {model, parameters : {
-        wcmMode, pagePath, requestUrl, modelRootUrl} = {}
+    const {
+            model,
+            parameters : {
+                wcmMode,
+                pagePath,
+                requestUrl,
+                modelRootUrl
+            } = {}
     } = req.body;
 
     preRender(model, wcmMode, pagePath, requestUrl, requestUrl, modelRootUrl).then((payload) => {

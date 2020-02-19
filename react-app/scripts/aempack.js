@@ -6,7 +6,7 @@ const aemPack = require('aempack');
 const paths = require('./../config/paths');
 
 const developWithSSR = process.env.DEVELOPSSR || false;
-const webpackConfig = require('../webpack.config');
+const webpackConfig = require('./../config/webpack.config.dev');
 
 const user = process.env.AEMUSER  || 'admin';
 const password = process.env.AEMPW || 'admin';
@@ -24,7 +24,7 @@ const computeProxyUrl = () => {
     return 'http://' + proxyHost + port;
 };
 
-const serverWebpackConfig = require('../webpack.server.config');
+const serverWebpackConfig = require('../config/webpack.config.server.dev');
 
 aemPack({
     delays: {

@@ -16,8 +16,6 @@
 import React, {Component} from 'react';
 import {extractModelId} from '../Utils';
 
-require('./Image.css');
-
 
 /**
  * Expected usage of the Image Component.
