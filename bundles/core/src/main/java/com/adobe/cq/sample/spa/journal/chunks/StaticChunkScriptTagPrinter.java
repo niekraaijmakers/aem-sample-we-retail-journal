@@ -11,6 +11,7 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 @Component(
         service = {Servlet.class},
@@ -21,29 +22,13 @@ import java.io.PrintWriter;
 )
 public class StaticChunkScriptTagPrinter extends SlingSafeMethodsServlet {
     
-    public static final String SCRIPT_TAG = "<script type=\"text/javascript\" src=\"%s\"></script>";
-    
     @Reference
-    private AssetManifestService manifestService;
+    private PrintChunkService printChunkService;
     
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-        final PrintWriter writer = response.getWriter();
-    
-        try {
-            writer.append(printScriptTag(request, "bootstrap.js"));
-            writer.append(printScriptTag(request, "main.js"));
-        } catch (LoginException e) {
-            throw new ServletException(e);
-        }
-        
+        printChunkService.printJsChunkToResponse("bootstrap", request, response);
+        printChunkService.printJsChunkToResponse("main", request, response);
     }
-    
-    private String printScriptTag(SlingHttpServletRequest request, String chunk) throws IOException, LoginException {
-        final String pathToChunk = manifestService.getManifest(request).get(chunk);
-        return String.format(SCRIPT_TAG, pathToChunk);
-    }
-    
-  
     
 }

@@ -76,7 +76,7 @@ const renderModelToHTMLString = (model, pagePath, requestUrl, requestPath, pageM
 
     return {
         html: rendered,
-        chunkNames: rawChunkNames
+        chunkNames: chunkNames
     }
 };
 

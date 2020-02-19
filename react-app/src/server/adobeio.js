@@ -9,6 +9,7 @@ global.main = ({model, parameters}) => {
             resolve({
                 statusCode: 200,
                 body: {
+                    code: 200,
                     payload: html
                 }
             });
@@ -16,6 +17,7 @@ global.main = ({model, parameters}) => {
             reject({
                 statusCode: 500,
                 body: {
+                    code: 500,
                     payload: 'error!' + error
                 }
             });

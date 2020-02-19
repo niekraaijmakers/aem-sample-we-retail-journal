@@ -51,4 +51,9 @@ public class SSRParameters {
     public String getRequestUrl() {
         return requestUrl;
     }
+    
+    @JsonInclude
+    public String getRequestPath() {
+        return requestUrl;
+    }
 }
