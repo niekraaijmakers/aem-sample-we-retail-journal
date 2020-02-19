@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const devConfig = require('./webpack.config.dev');
+const devConfig = require('./webpack.config.prod');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -17,7 +17,6 @@ Object.assign(env.stringified['process.env'], {
 
 module.exports = Object.assign({}, devConfig, {
     entry: [paths.appServerIndexJs],
-    devtool: 'inline-module-source-map',
     target: 'node',
     output: {
         path: paths.serverBuild,
