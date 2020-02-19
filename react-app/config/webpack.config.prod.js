@@ -16,25 +16,14 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const { StatsWriterPlugin } = require("webpack-stats-plugin");
 const getStyleLoaders = require('./styleloaders');
 
-// Webpack uses `publicPath` to determine where the app is being served from.
-// It requires a trailing slash, or the file assets will get an incorrect path.
+
 const publicPath = paths.clientLibRelativePath + '/';
-// Some apps do not use client-side routing with pushState.
-// Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
-// `publicUrl` is just like `publicPath`, but we will provide it to our app
-// as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
-// Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
 const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-// Assert this just to be safe.
-// Development builds of React are slow and not intended for production.
-// if (env.stringified['process.env'].NODE_ENV !== '"production"') {
-//     throw new Error('Production builds must have NODE_ENV=production.');
-// }
 
 // Inject mode into stringified environment
 Object.assign(env.stringified['process.env'], {
@@ -49,29 +38,19 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 
 
-// This is the production configuration.
-// It compiles slowly and is focused on producing a fast and minimal bundle.
-// The development configuration is different and lives in a separate file.
+
 module.exports = {
     mode: 'production',
-    // Don't attempt to continue if there are any errors.
+
     bail: true,
-    // We generate sourcemaps in production. This is slow but gives good results.
-    // You can exclude the *.map files from the build during deployment.
-    // In production, we only want to load the app code.
     entry: [paths.appIndexJs],
     output: {
         // The build folder.
         path: paths.clientLibRoot,
-        // Generated JS file names (with nested folders).
-        // There will be one main bundle, and one file per asynchronous chunk.
-        // We don't currently advertise code splitting but Webpack supports it.
         filename: 'js/[name].[hash:8].js',
-        // There are also additional JS chunk files if you use code splitting.
         chunkFilename: 'js/[name].[hash:8].js',
-        // We inferred the "public path" (such as / or /my-project) from homepage.
         publicPath: publicPath,
-        // Point sourcemap entries to original disk location (format as URL on Windows)
+
         devtoolModuleFilenameTemplate: info =>
             path
             .relative(paths.appSrc, info.absoluteResourcePath)
@@ -82,25 +61,13 @@ module.exports = {
             new TerserPlugin({
                 terserOptions: {
                     parse: {
-                        // we want terser to parse ecma 8 code. However, we don't want it
-                        // to apply any minfication steps that turns valid ecma 5 code
-                        // into invalid ecma 5 code. This is why the 'compress' and 'output'
-                        // sections only apply transformations that are ecma 5 safe
-                        // https://github.com/facebook/create-react-app/pull/4234
                         ecma: 8,
                     },
                     compress: {
                         ecma: 5,
                         warnings: false,
-                        // Disabled because of an issue with Uglify breaking seemingly valid code:
-                        // https://github.com/facebook/create-react-app/issues/2376
-                        // Pending further investigation:
-                        // https://github.com/mishoo/UglifyJS2/issues/2011
                         comparisons: false,
-                        // Disabled because of an issue with Terser breaking valid code:
-                        // https://github.com/facebook/create-react-app/issues/5250
-                        // Pending futher investigation:
-                        // https://github.com/terser-js/terser/issues/120
+
                         inline: 2,
                     },
                     mangle: {
@@ -109,15 +76,12 @@ module.exports = {
                     output: {
                         ecma: 5,
                         comments: false,
-                        // Turned on because emoji and regex is not minified properly using default
-                        // https://github.com/facebook/create-react-app/issues/2488
+
                         ascii_only: true,
                     },
                 },
-                // Use multi-process parallel running to improve the build speed
-                // Default number of concurrent runs: os.cpus().length - 1
                 parallel: true,
-                // Enable file caching
+
                 cache: true,
                 sourceMap: shouldUseSourceMap,
             }),
@@ -170,11 +134,6 @@ module.exports = {
             // It is guaranteed to exist because we tweak it in `env.js`
             process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
         ),
-        alias: {
-            // Support React Native Web
-            // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-            'react-native': 'react-native-web',
-        },
         plugins: [
             // Adds support for installing with Plug'n'Play, leading to faster installs and adding
             // guards against forgotten dependencies and such.
