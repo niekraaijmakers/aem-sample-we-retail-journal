@@ -6,7 +6,8 @@ const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const publicPath = paths.clientLibRelativePath + '/';
+const publicPath = paths.publicPath;
+
 const publicUrl = publicPath.slice(0, -1);
 const env = getClientEnvironment(publicUrl);
 

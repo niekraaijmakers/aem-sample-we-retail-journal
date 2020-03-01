@@ -19,7 +19,7 @@ import java.util.Map;
 @Component(service = AssetManifestService.class)
 public class AssetManifestServiceImpl implements AssetManifestService {
     
-    private static final String PATH_TO_ASSET_MANIFEST = "/etc/we-retail-journal/clientlibs/site/asset-manifest.json";
+    private static final String PATH_TO_ASSET_MANIFEST = "/apps/we-retail-journal/clientlibs/clientlib-site/resources/asset-manifest.json";
     
     @Override
     public Map<String,String> getManifest(SlingHttpServletRequest request) throws IOException {

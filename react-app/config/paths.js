@@ -65,10 +65,12 @@ const resolveModule = (resolveFn, filePath) => {
     return resolveFn(`${filePath}.js`);
 };
 
+const clientLibPath = '/apps/we-retail-journal/clientlibs/clientlib-site/resources';
+
 // config after eject: we're in ./config/
 module.exports = {
     dotenv: resolveApp('.env'),
-    clientLibRoot: resolveApp('../ui.apps/jcr_root/etc/we-retail-journal/clientlibs/site'),
+    clientLibRoot: resolveApp('../ui.apps/jcr_root' + clientLibPath),
     appPath: resolveApp('.'),
     appBuild: resolveApp('build'),
     appDist: resolveApp('dist'),
@@ -81,7 +83,8 @@ module.exports = {
     appSrc: resolveApp('src'),
     appNodeModules: resolveApp('node_modules'),
     publicUrl: getPublicUrl(resolveApp('package.json')),
-    clientLibRelativePath: '/etc/we-retail-journal/clientlibs/site'
+    publicPath: '/etc.clientlibs/we-retail-journal/clientlibs/clientlib-site/resources/',
+    clientLibRelativePath: clientLibPath
 
 };
 

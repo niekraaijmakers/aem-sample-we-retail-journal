@@ -17,7 +17,7 @@ const { StatsWriterPlugin } = require("webpack-stats-plugin");
 const getStyleLoaders = require('./styleloaders');
 
 
-const publicPath = paths.clientLibRelativePath + '/';
+const publicPath = paths.publicPath;
 
 const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
