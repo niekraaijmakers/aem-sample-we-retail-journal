@@ -4,4 +4,6 @@
 <sly data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}"></sly>
 <sly data-sly-test="${wcmmode.edit || wcmmode.preview}"
      data-sly-call="${clientLib.js @ categories='cq.authoring.pagemodel.messaging'}"></sly>
-<sly data-sly-call="${clientLib.js @ categories='we-retail-journal-react'}"></sly>
+
+<sly data-sly-resource="${resource @ resourceType='we-retail-journal/chunks/static-js'}"/>
+<sly data-sly-resource="${resource @ resourceType='we-retail-journal/chunks/ssr-js'}"/>

@@ -13,9 +13,21 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-require('./components/Text');
-require('./components/Image');
-require('./components/Weather');
-require('./components/Navigation');
-require('./components/Page');
+import {MapTo, withComponentMappingContext} from "@adobe/cq-react-editable-components";
+import editConfigs from "./editConfigs";
+import withAsyncImport from "./utilities/withAsyncImport";
 
+import Navigation from "./components/Navigation";
+import AppPage from "./components/Page";
+import {withRoute} from "./RouteHelper";
+
+const Text = withAsyncImport(() => import(/* webpackChunkName: "core" */ './components/Text'));
+const Image = withAsyncImport(() => import(/* webpackChunkName: "core" */ './components/Image'));
+const Weather = withAsyncImport(() => import(/* webpackChunkName: "weather" */ './components/Weather'));
+
+MapTo('we-retail-journal/react/components/structure/page')(withComponentMappingContext(withRoute(AppPage)));
+
+MapTo('we-retail-journal/components/text')(Text, editConfigs.text);
+MapTo('we-retail-journal/components/image')(Image, editConfigs.image);
+MapTo("we-retail-journal/components/navigation")(Navigation);
+MapTo('we-retail-journal/components/weather')(Weather, editConfigs.weather);

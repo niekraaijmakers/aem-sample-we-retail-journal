@@ -16,20 +16,11 @@
  
 import React, {Component} from 'react';
 import ReactWeather from 'react-open-weather';
-import {MapTo} from '@adobe/cq-react-editable-components';
 
-require('./Weather.css');
 
-const WeatherEditConfig = {
 
-    emptyLabel: 'Weather',
 
-    isEmpty: function(props) {
-        return !props.city || props.city.trim().length < 1;
-    }
-};
-
-class Weather extends Component {
+export default class Weather extends Component {
     render() {
         if (this.props.apiKey) {
             return <ReactWeather key={'react-weather' + Date.now()} 
@@ -40,4 +31,3 @@ class Weather extends Component {
     }
 }
 
-MapTo('we-retail-journal/components/weather')(Weather, WeatherEditConfig);

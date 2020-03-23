@@ -14,12 +14,10 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import React, {Component} from 'react';
-import {MapTo} from '@adobe/cq-react-editable-components';
 import {Link} from "react-router-dom";
 
-require('./Navigation.css');
 
-class Navigation extends Component {
+export default class Navigation extends Component {
 
     getLink(item) {
         if (!item || !item.url || !item.title) {
@@ -65,5 +63,3 @@ class Navigation extends Component {
         );
     }
 }
-
-export default MapTo("we-retail-journal/components/navigation")(Navigation);

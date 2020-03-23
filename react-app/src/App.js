@@ -16,8 +16,6 @@
 import React from 'react';
 import { Page, withModel } from '@adobe/cq-react-editable-components';
 
-require('./fonts.css');
-require('./main.css');
 
 // This component is the application entry point
 class App extends Page {

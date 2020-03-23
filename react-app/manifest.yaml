@@ -1,0 +1,10 @@
+packages:
+  namespace:
+    license: Apache-2.0
+    actions:
+      weretail:
+        function: serverBuild/adobeio.js
+        web: yes
+        runtime: 'nodejs:10'
+
+
