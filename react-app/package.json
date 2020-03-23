@@ -36,9 +36,10 @@
     "preversion": "npm run test && npm run build:production",
     "version": "git add -A",
     "postversion": "git push && git push --tags",
-    "aempack": "cross-env PROXYHOST=local.we-retail-journal.com NODE_ENV=development npm-run-all -p watch-css start-aem-script",
-    "aempack-ssr": "cross-env DEVELOPSSR=true  NODE_ENV=development npm-run-all -p watch-css start-aem-script",
-    "aempack-pub": "cross-env PROXYHOST=local.we-retail-journal.com AEMPORT=4503 cross-env NODE_ENV=development npm-run-all -p watch-css start-aem-script",
+    "start-aempack": "node scripts/aempack.js",
+    "aempack": "cross-env PROXYHOST=local.we-retail-journal.com NODE_ENV=development npm-run-all -p watch-css start-aempack",
+    "aempack-ssr": "cross-env DEVELOPSSR=true  NODE_ENV=development npm-run-all -p watch-css start-aempack",
+    "aempack-pub": "cross-env PROXYHOST=local.we-retail-journal.com AEMPORT=4503 cross-env NODE_ENV=development npm-run-all -p watch-css start-aempack",
     "aempack-pub-ssr": "cross-env DEVELOPSSR=true npm-run-all -p aempack-pub"
   },
   "babel": {
