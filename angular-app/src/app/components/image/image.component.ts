@@ -19,7 +19,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-image',
   host: { 'class': 'cmp-image' },
-  styleUrls:['./image.component.css'],
+  styleUrls:['./image.component.scss'],
   templateUrl: './image.component.html',
 })
 
