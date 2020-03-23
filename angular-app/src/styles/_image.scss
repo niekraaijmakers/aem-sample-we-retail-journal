@@ -14,29 +14,29 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 :host-context img {
-    border: 0;
-    font: inherit;
-    font-size: 100%;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
 }
 
 :host-context.cmp-image {
-    padding: 0 12px !important;
+  padding: 0 12px !important;
 }
 
 :host-context.cmp-image[data-cq-data-path="root/responsivegrid/header_image"] {
-    padding: 0 0 40px 0 !important;
+  padding: 0 0 40px 0 !important;
 }
 
 :host-context.cmp-image[data-cq-data-path="root/responsivegrid/header_image"] img {
-    margin: 0;
+  margin: 0;
 }
 
 :host-context.cmp-image img {
-    margin: 60px 0;
-    width: 100%;
+  margin: 60px 0;
+  width: 100%;
 }
 
 :host-context {

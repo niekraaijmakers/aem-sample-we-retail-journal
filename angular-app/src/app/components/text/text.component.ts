@@ -24,7 +24,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     '[innerHtml]': "content",
     'data-rte-editelement': "true"
   },
-  styleUrls:['./text.component.scss'],
   template: ''
 })
 export class TextComponent {

@@ -120,7 +120,9 @@ public class SpaPageBindingsProviderImpl implements SpaPageBindingsProvider, Fil
          
         if (hierarchyPage != null) {
             
-            if(     ssrRenderingService.isEnabled() && (
+            if(     ssrRenderingService.isEnabled() &&
+                    !request.getResource().getPath().startsWith("/content/we-retail-journal/angular") &&
+                    (
                     request.getRequestPathInfo().getSelectorString() == null || (
                     !request.getRequestPathInfo().getSelectorString().contains("model")
             ))){

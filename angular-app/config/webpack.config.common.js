@@ -16,8 +16,7 @@ module.exports = {
     entry: {
         vendor: './src/vendor.ts',
         polyfills: './src/polyfills.ts',
-        main: isDev ? './src/main.ts' : './src/main.aot.ts',
-
+        main: './src/main.ts',
     },
 
     output: {
@@ -27,8 +26,14 @@ module.exports = {
         publicPath: publicPath,
     },
 
+    optimization: {
+        runtimeChunk: {
+            name: 'bootstrap',
+        },
+    },
+
     resolve: {
-        extensions: ['.ts', '.js', '.scss']
+        extensions: ['.ts', '.js', '.scss', '.css']
     },
 
     module: {
@@ -38,7 +43,7 @@ module.exports = {
                 loader: 'html-loader'
             },
             {
-                test: /\.(scss|sass)$/,
+                test: /\.(scss|sass|css)$/,
                 use: [
                     { loader: 'style-loader', options: { sourceMap: isDev } },
                     { loader: 'css-loader', options: { sourceMap: isDev } },
@@ -47,13 +52,13 @@ module.exports = {
                 include: helpers.root('src', 'assets')
             },
             {
-                test: /\.(scss|sass)$/,
+                test: /\.(scss|sass|css)$/,
                 use: [
                     'to-string-loader',
                     { loader: 'css-loader', options: { sourceMap: isDev } },
                     { loader: 'sass-loader', options: { sourceMap: isDev } }
                 ],
-                include: helpers.root('src', 'app')
+                include: helpers.root('src', 'styles')
             }
         ]
     },

@@ -19,12 +19,19 @@ import java.util.Map;
 @Component(service = AssetManifestService.class)
 public class AssetManifestServiceImpl implements AssetManifestService {
     
-    private static final String PATH_TO_ASSET_MANIFEST = "/apps/we-retail-journal/clientlibs/clientlib-site/resources/asset-manifest.json";
+    private static final String PATH_REACT_MANIFEST = "/apps/we-retail-journal/clientlibs/clientlib-site/resources/asset-manifest.json";
+    private static final String PATH_ANGULAR_MANIFEST = "/apps/we-retail-journal/clientlibs/clientlib-site-angular/resources/asset-manifest.json";
     
     @Override
     public Map<String,String> getManifest(SlingHttpServletRequest request) throws IOException {
         
-            Resource assetManifestResource = request.getResourceResolver().getResource(PATH_TO_ASSET_MANIFEST);
+            final Resource assetManifestResource;
+            
+            if(request.getResource().getPath().startsWith("/content/we-retail-journal/angular")){
+                assetManifestResource = request.getResourceResolver().getResource(PATH_ANGULAR_MANIFEST);
+            }else{
+                assetManifestResource = request.getResourceResolver().getResource(PATH_REACT_MANIFEST);
+            }
     
             if(assetManifestResource != null){
                 InputStream file = assetManifestResource.adaptTo(InputStream.class);

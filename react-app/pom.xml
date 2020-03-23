@@ -109,7 +109,7 @@
                                     <goal>npm</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>run build-aem-dev</arguments>
+                                    <arguments>run build</arguments>
                                 </configuration>
                             </execution>
                         </executions>
@@ -138,7 +138,7 @@
                                     <goal>npm</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>run build-aem-dev</arguments>
+                                    <arguments>run build</arguments>
                                 </configuration>
                             </execution>
                         </executions>
@@ -167,7 +167,7 @@
                                     <goal>npm</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>run build-aem-prod</arguments>
+                                    <arguments>run build:production</arguments>
                                 </configuration>
                             </execution>
                         </executions>
@@ -194,7 +194,7 @@
                                     <goal>npm</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>run build-adobeio</arguments>
+                                    <arguments>run build:adobeio</arguments>
                                 </configuration>
                             </execution>
                         </executions>

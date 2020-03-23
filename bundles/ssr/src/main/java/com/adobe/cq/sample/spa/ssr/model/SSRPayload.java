@@ -25,10 +25,6 @@ public class SSRPayload {
     public void setModel(HierarchyPage model) {
         this.model = model;
     }
-<<<<<<< HEAD:react-app/clientlib.config.js
-};
-
-=======
     
     public void setParameters(SSRParameters parameters) {
         this.parameters = parameters;
@@ -42,4 +38,3 @@ public class SSRPayload {
         return parameters;
     }
 }
->>>>>>> feature/aemaas-compat:bundles/ssr/src/main/java/com/adobe/cq/sample/spa/ssr/model/SSRPayload.java
