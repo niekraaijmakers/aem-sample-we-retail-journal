@@ -14,11 +14,15 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+import {ButtonV1Component, ButtonV1IsEmptyFn} from "./core/button/v1/button.v1.component";
 import { TextComponent } from "./text/text.component";
 import { ImageComponent } from "./image/image.component";
 import { WeatherComponent } from "./weather/weather.component";
 import { NavigationComponent } from "./navigation/navigation.component";
 import { MapTo, AEMContainerComponent, AEMResponsiveGridComponent } from "@adobe/cq-angular-editable-components";
+import {TabsV2Component} from "./core/containers/tabs/v2/tabs.v2.component";
+import {AccordionV1Component} from "./core/containers/accordion/v1/accordion.v1.component";
+import {ContainerIsEmptyFn} from "./core/containers/AbstractContainerComponent";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -47,6 +51,10 @@ const TextEditConfig = {
         return !cqModel || !cqModel.text || cqModel.text.trim().length < 1;
     }
 };
+
+MapTo('contrib/wcm/components/accordion')(AccordionV1Component, {emptyLabel:'AccordionV1', isEmpty:ContainerIsEmptyFn});
+MapTo('contrib/wcm/components/tabs')(TabsV2Component,{emptyLabel:'AccordionV1', isEmpty:ContainerIsEmptyFn});
+MapTo('we-retail-journal/components/button')(ButtonV1Component, {emptyLabel: 'ButtonV1', isEmpty:ButtonV1IsEmptyFn});
 MapTo('we-retail-journal/components/text')(TextComponent, TextEditConfig);
 MapTo('we-retail-journal/components/image')(ImageComponent, ImageEditConfig);
 MapTo('wcm/foundation/components/responsivegrid')(AEMResponsiveGridComponent);

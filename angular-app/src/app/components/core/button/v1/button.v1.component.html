@@ -1,0 +1,21 @@
+<div *ngIf="isEmpty; then placeHolderBlock else componentBlock"></div>
+
+<ng-template #placeHolderBlock>
+    <core-placeholder componentTitle="ButtonV1"></core-placeholder>
+</ng-template>
+<ng-template #componentBlock>
+    <div *ngIf="link; then linkBlock else staticBlock"></div>
+</ng-template>
+
+<ng-template #linkBlock>
+    <a [href]="link" (click)="onClick()">
+        <span *ngIf="icon" class="{{iconClass}}"></span>
+        <span class="{{class}}__text">{{text}}</span>
+    </a>
+</ng-template>
+<ng-template #staticBlock>
+    <button (click)="onClick()">
+        <span *ngIf="icon" class="{{iconClass}}"></span>
+        <span class="{{class}}__text">{{text}}</span>
+    </button>
+</ng-template>

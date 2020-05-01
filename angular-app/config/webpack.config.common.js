@@ -2,6 +2,7 @@
 
 const CleanWebpackPlugin   = require('clean-webpack-plugin');
 const HtmlWebpackPlugin    = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const paths                = require('./paths');
 const helpers              = require('./helpers');
 
@@ -18,14 +19,13 @@ module.exports = {
         polyfills: './src/polyfills.ts',
         main: './src/main.ts',
     },
-
+    bail: true,
     output: {
         path: paths.clientLibRoot,
         filename: 'js/[name].[hash:8].js',
         chunkFilename: 'js/[name].[hash:8].js',
         publicPath: publicPath,
     },
-
     optimization: {
         runtimeChunk: {
             name: 'bootstrap',
@@ -54,7 +54,7 @@ module.exports = {
             {
                 test: /\.(scss|sass|css)$/,
                 use: [
-                    'to-string-loader',
+                    {   loader: MiniCssExtractPlugin.loader , options: { sourceMap: isDev }},
                     { loader: 'css-loader', options: { sourceMap: isDev } },
                     { loader: 'sass-loader', options: { sourceMap: isDev } }
                 ],
@@ -64,6 +64,10 @@ module.exports = {
     },
 
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[name].[contenthash:8].chunk.css',
+        }),
         new CleanWebpackPlugin(
             helpers.root('dist'), { root: helpers.root(), verbose: true }),
         new StatsWriterPlugin({

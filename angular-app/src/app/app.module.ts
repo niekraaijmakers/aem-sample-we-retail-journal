@@ -28,6 +28,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { MenuComponent } from './components/navigation/menu/menu.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ButtonV1Component} from "./components/core/button/v1/button.v1.component";
+import {EditPlaceholderComponent} from "./components/core/editplaceholder/editplaceholder.component";
+import {TabsV2Component} from "./components/core/containers/tabs/v2/tabs.v2.component";
+import {AccordionV1Component} from "./components/core/containers/accordion/v1/accordion.v1.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -42,13 +46,17 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [ ModelManagerService,
   { provide: APP_BASE_HREF, useValue: '/' } ],
   declarations: [ AppComponent,
+      TabsV2Component,
+      AccordionV1Component,
+                  EditPlaceholderComponent,
+                  ButtonV1Component,
                   TextComponent,
                   ImageComponent,
                   WeatherComponent,
                   NavigationComponent,
                   MenuComponent,
                   MainContentComponent],
-  entryComponents: [ TextComponent,
+  entryComponents: [ AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
   ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent ],
   bootstrap: [ AppComponent ]
 })

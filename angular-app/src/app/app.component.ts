@@ -26,7 +26,7 @@ import { environment } from '../environments/environment';
 @Component({
   selector: 'app-root',
   host: {
-    'class': 'app'
+    'class': 'app t-cmp-clean'
   },
   template: `
     <router-outlet></router-outlet>

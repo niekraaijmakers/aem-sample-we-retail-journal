@@ -8,7 +8,7 @@ const helpers      = require('./helpers');
 module.exports = webpackMerge(commonConfig, {
     mode: 'development',
 
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'inline-source-map',
 
 
     optimization: {
