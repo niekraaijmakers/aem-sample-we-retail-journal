@@ -23,6 +23,7 @@ import { MapTo, AEMContainerComponent, AEMResponsiveGridComponent } from "@adobe
 import {TabsV2Component} from "./core/containers/tabs/v2/tabs.v2.component";
 import {AccordionV1Component} from "./core/containers/accordion/v1/accordion.v1.component";
 import {ContainerIsEmptyFn} from "./core/containers/AbstractContainerComponent";
+import {CarouselV1Component} from "./core/containers/carousel/v1/carousel.v1.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -52,6 +53,7 @@ const TextEditConfig = {
     }
 };
 
+MapTo('contrib/wcm/components/carousel')(CarouselV1Component,{emptyLabel:'CarouselV1', isEmpty:ContainerIsEmptyFn});
 MapTo('contrib/wcm/components/accordion')(AccordionV1Component, {emptyLabel:'AccordionV1', isEmpty:ContainerIsEmptyFn});
 MapTo('contrib/wcm/components/tabs')(TabsV2Component,{emptyLabel:'AccordionV1', isEmpty:ContainerIsEmptyFn});
 MapTo('we-retail-journal/components/button')(ButtonV1Component, {emptyLabel: 'ButtonV1', isEmpty:ButtonV1IsEmptyFn});

@@ -32,6 +32,7 @@ import { ButtonV1Component} from "./components/core/button/v1/button.v1.componen
 import {EditPlaceholderComponent} from "./components/core/editplaceholder/editplaceholder.component";
 import {TabsV2Component} from "./components/core/containers/tabs/v2/tabs.v2.component";
 import {AccordionV1Component} from "./components/core/containers/accordion/v1/accordion.v1.component";
+import {CarouselV1Component} from "./components/core/containers/carousel/v1/carousel.v1.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -54,9 +55,10 @@ import {AccordionV1Component} from "./components/core/containers/accordion/v1/ac
                   ImageComponent,
                   WeatherComponent,
                   NavigationComponent,
+                  CarouselV1Component,
                   MenuComponent,
                   MainContentComponent],
-  entryComponents: [ AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
+  entryComponents: [ CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
   ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent ],
   bootstrap: [ AppComponent ]
 })
