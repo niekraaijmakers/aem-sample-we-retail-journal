@@ -10,12 +10,12 @@
 <ng-template #linkBlock>
     <a [href]="link" (click)="onClick()">
         <span *ngIf="icon" class="{{iconClass}}"></span>
-        <span class="{{class}}__text">{{text}}</span>
+        <span class="{{class}}__text" [innerText]="text"></span>
     </a>
 </ng-template>
 <ng-template #staticBlock>
     <button (click)="onClick()">
         <span *ngIf="icon" class="{{iconClass}}"></span>
-        <span class="{{class}}__text">{{text}}</span>
+        <span class="{{class}}__text" [innerText]="text"></span>
     </button>
 </ng-template>

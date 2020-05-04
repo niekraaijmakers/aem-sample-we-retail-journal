@@ -33,14 +33,14 @@
                             [attr.aria-label]="accessibility.previous"
                             (click)="handleOnButtonPrev()">
                         <span class="{{class}}__action-icon"></span>
-                        <span class="{{class}}__action-text">{{accessibility.previous}}</span>
+                        <span class="{{class}}__action-text" [innerText]="accessibility.previous"></span>
                     </button>
                     <button class="{{class}}__action {{class}}__action--next"
                             type="button"
                             [attr.aria-label]="accessibility.next"
                             (click)="handleOnButtonNext()">
                         <span class="{{class}}__action-icon"></span>
-                        <span class="{{class}}__action-text">{{accessibility.next}}</span>
+                        <span class="{{class}}__action-text" [innerText]="accessibility.next"></span>
                     </button>
                 
                 </div>
@@ -50,7 +50,7 @@
                         role="tab"
                         (click)="handleIndicatorClick(i)"
                         [attr.aria-controls]="getAriaControlsId(i)"
-                        [attr.aria-label]="getIndicatorAriaLabel(i)">{{cqItems[itemKey]['cq:panelTitle']}}</li>
+                        [attr.aria-label]="getIndicatorAriaLabel(i)" [innerText]="cqItems[itemKey]['cq:panelTitle']"></li>
                 </ol>
             </div>
         

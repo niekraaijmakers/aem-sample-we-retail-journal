@@ -1,6 +1,7 @@
 import {ɵa as AEMAllowedComponentsContainerComponent} from "@adobe/cq-angular-editable-components";
 import {ContainerProperties} from "../../../common";
 import {Component, HostBinding, Input, OnInit} from "@angular/core";
+import {AbstractContainerComponent} from "../../AbstractContainerComponent";
 
 export interface CarouselV1PropertiesAccessibility {
     play: string;
@@ -35,10 +36,9 @@ export interface CarouselV1Properties extends ContainerProperties{
     },
     templateUrl: './carousel.v1.component.html'
 })
-export class CarouselV1Component extends AEMAllowedComponentsContainerComponent implements CarouselV1Properties,OnInit{
+export class CarouselV1Component extends AbstractContainerComponent implements CarouselV1Properties,OnInit{
 
     @Input() id = "carousel";
-    @Input() isInEditor: false;
     @Input() autoplay: false;
     @Input() accessibilityLabel = 'Carousel';
     @Input() autopauseDisabled: false;

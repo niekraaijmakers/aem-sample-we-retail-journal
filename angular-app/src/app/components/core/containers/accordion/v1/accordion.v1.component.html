@@ -18,7 +18,7 @@
             <button id="accordion-dca50b5feb-button-0" class="{{getButtonClass(itemKey)}}"
                     aria-controls="accordion-dca50b5feb-panel-0" data-cmp-hook-accordion="button"
                     (click)="onClick(itemKey)">
-                <span class="{{class}}__title">{{getButtonTitle(itemKey)}}</span>
+                <span class="{{class}}__title" [innerText]="getButtonTitle(itemKey)"></span>
                 <span class="{{class}}__icon"></span>
             </button>
         </h3>

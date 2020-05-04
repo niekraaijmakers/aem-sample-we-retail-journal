@@ -33,6 +33,7 @@ import {EditPlaceholderComponent} from "./components/core/editplaceholder/editpl
 import {TabsV2Component} from "./components/core/containers/tabs/v2/tabs.v2.component";
 import {AccordionV1Component} from "./components/core/containers/accordion/v1/accordion.v1.component";
 import {CarouselV1Component} from "./components/core/containers/carousel/v1/carousel.v1.component";
+import {ContainerV1Component} from "./components/core/containers/container/v1/container.v1.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -50,6 +51,7 @@ import {CarouselV1Component} from "./components/core/containers/carousel/v1/caro
       TabsV2Component,
       AccordionV1Component,
                   EditPlaceholderComponent,
+                    ContainerV1Component,
                   ButtonV1Component,
                   TextComponent,
                   ImageComponent,
@@ -58,7 +60,7 @@ import {CarouselV1Component} from "./components/core/containers/carousel/v1/caro
                   CarouselV1Component,
                   MenuComponent,
                   MainContentComponent],
-  entryComponents: [ CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
+  entryComponents: [ ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
   ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent ],
   bootstrap: [ AppComponent ]
 })
