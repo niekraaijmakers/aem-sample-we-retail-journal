@@ -16,7 +16,7 @@
 
 
 import {Component, Input, Output, EventEmitter, HostBinding} from '@angular/core';
-import {AbstractCoreComponent} from "../../AbstractCoreComponent";
+import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
 
 
 export interface ButtonV1Model{

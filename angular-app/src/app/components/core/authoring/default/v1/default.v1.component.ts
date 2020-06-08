@@ -15,47 +15,28 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
-import {Component, Input, Output, EventEmitter, HostBinding} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
 
 
-export interface ButtonV1Model{
-    text?: string;
-    link?: string;
-    icon?: string;
-    ariaLabel?: string;
+export interface DefaultV1Model{
+    html: string;
 }
 
 @Component({
-    selector: 'core-button-v1',
-    templateUrl: './button.v1.component.html',
+    selector: 'core-default-v1',
+    templateUrl: './default.v1.component.html',
 })
-export class ButtonV1Component extends AbstractCoreComponent implements ButtonV1Model{
+export class DefaultV1Component extends AbstractCoreComponent implements DefaultV1Model{
 
-    @HostBinding('class') class = 'cmp-button';
-    @Input() text?: string;
-    @Input() link?: string;
-    @Input() icon?: string;
-    @Input() ariaLabel?: string;
-
-    clickRequest = new EventEmitter();
-
-    protected get iconClass():string{
-        return `${this.class}__icon __icon--${this.icon}`;
-    }
-    protected get textClass():string{
-        return `${this.class}__text`;
-    }
-
-    onClick() {
-        this.clickRequest.emit();
-    }
+    @HostBinding('class') class = 'cmp-default';
+    @Input() html: string;
 
     get isEmpty(): boolean {
-        return ButtonV1IsEmptyFn(this);
+        return DefaultV1IsEmptyFn(this);
     }
 }
 
-export function ButtonV1IsEmptyFn(props:ButtonV1Model): boolean{
-    return props.text == null || props.text.trim().length === 0;
+export function DefaultV1IsEmptyFn(props:DefaultV1Model): boolean{
+    return props.html == null || props.html.trim().length === 0;
 }
