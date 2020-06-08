@@ -351,6 +351,11 @@
             <groupId>com.adobe.cq</groupId>
             <artifactId>core.wcm.components.core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.adobe.acs</groupId>
+            <artifactId>acs-aem-commons-bundle</artifactId>
+            <version>4.7.0</version>
+        </dependency>
         <!-- TODO: CQ-4243301 remove after the backport of the API and its inclusion in the Uber-Jar  -->
         <dependency>
             <groupId>com.adobe.cq</groupId>

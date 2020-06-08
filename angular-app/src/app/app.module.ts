@@ -27,13 +27,15 @@ import { WeatherComponent } from './components/weather/weather.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MenuComponent } from './components/navigation/menu/menu.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
-import { AppRoutingModule } from './app-routing.module';
-import { ButtonV1Component} from "./components/core/button/v1/button.v1.component";
+import {AppRoutingModule} from './app-routing.module';
+import {ButtonV1Component} from "./components/core/authoring/button/v1/button.v1.component";
 import {EditPlaceholderComponent} from "./components/core/editplaceholder/editplaceholder.component";
 import {TabsV2Component} from "./components/core/containers/tabs/v2/tabs.v2.component";
 import {AccordionV1Component} from "./components/core/containers/accordion/v1/accordion.v1.component";
 import {CarouselV1Component} from "./components/core/containers/carousel/v1/carousel.v1.component";
 import {ContainerV1Component} from "./components/core/containers/container/v1/container.v1.component";
+import {DefaultV1Component} from "./components/core/authoring/default/v1/default.v1.component";
+import {SafeHtmlPipe} from "./pipes/safeHtml.pipe";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -47,21 +49,24 @@ import {ContainerV1Component} from "./components/core/containers/container/v1/co
     BrowserTransferStateModule ],
   providers: [ ModelManagerService,
   { provide: APP_BASE_HREF, useValue: '/' } ],
-  declarations: [ AppComponent,
+  declarations: [AppComponent,
       TabsV2Component,
       AccordionV1Component,
-                  EditPlaceholderComponent,
-                    ContainerV1Component,
-                  ButtonV1Component,
-                  TextComponent,
-                  ImageComponent,
-                  WeatherComponent,
-                  NavigationComponent,
-                  CarouselV1Component,
-                  MenuComponent,
-                  MainContentComponent],
-  entryComponents: [ ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
-  ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent ],
+      EditPlaceholderComponent,
+      ContainerV1Component,
+      ButtonV1Component,
+      DefaultV1Component,
+      SafeHtmlPipe,
+      TextComponent,
+      ImageComponent,
+      WeatherComponent,
+      NavigationComponent,
+      CarouselV1Component,
+      MenuComponent,
+      MainContentComponent],
+    entryComponents: [
+        DefaultV1Component, ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
+        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

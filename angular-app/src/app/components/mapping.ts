@@ -14,7 +14,7 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-import {ButtonV1Component, ButtonV1IsEmptyFn} from "./core/button/v1/button.v1.component";
+import {ButtonV1Component, ButtonV1IsEmptyFn} from "./core/authoring/button/v1/button.v1.component";
 import { TextComponent } from "./text/text.component";
 import { ImageComponent } from "./image/image.component";
 import { WeatherComponent } from "./weather/weather.component";
@@ -25,6 +25,7 @@ import {AccordionV1Component} from "./core/containers/accordion/v1/accordion.v1.
 import {ContainerIsEmptyFn} from "./core/containers/AbstractContainerComponent";
 import {CarouselV1Component} from "./core/containers/carousel/v1/carousel.v1.component";
 import {ContainerV1Component} from "./core/containers/container/v1/container.v1.component";
+import {DefaultV1Component, DefaultV1IsEmptyFn} from "./core/authoring/default/v1/default.v1.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -65,4 +66,4 @@ MapTo('wcm/foundation/components/responsivegrid')(AEMResponsiveGridComponent);
 MapTo('we-retail-journal/components/weather')(WeatherComponent);
 MapTo('we-retail-journal/components/navigation')(NavigationComponent);
 MapTo('we-retail-journal/angular/components/structure/app')(AEMContainerComponent);
-
+MapTo('core/wcm/components/default/v1/default')(DefaultV1Component,{emptyLabel:'Default Component', isEmpty:DefaultV1IsEmptyFn});
