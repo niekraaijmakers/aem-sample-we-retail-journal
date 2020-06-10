@@ -17,11 +17,13 @@ interface AccordionV1Properties extends ContainerProperties{
 })
 export class AccordionV1Component extends AbstractContainerComponent implements AccordionV1Properties {
     @Input() singleExpansion: boolean;
-    @Input() expandedItems: string[];
+    @Input() expandedItems: string[] = [];
 
     @HostBinding('class') class = 'cmp-accordion';
 
-
+    getHostClassNames(): string {
+        return 'cmp-accordion';
+    }
 
     get isActiveItemNameSet(){
         return !!this.expandedItems && this.expandedItems.length > 0;
