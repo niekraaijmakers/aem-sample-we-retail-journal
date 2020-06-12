@@ -29,7 +29,7 @@ import {Component3} from "../../../../test/test-comp3.component";
 
 import {ModelManager} from '@adobe/cq-spa-page-model-manager';
 
-describe('AEMParsys', () => {
+describe('AccordionV1', () => {
 
     const TEST_COMPONENT_TITLE = 'test container title';
     const LAYOUT = require('../../../../test/data/accordion.json');
@@ -71,15 +71,9 @@ describe('AEMParsys', () => {
         component.classNames = LAYOUT.classNames;
 
         fixture.detectChanges();
-        let element = fixture.nativeElement;
+        let element = fixture.debugElement.nativeElement;
+        expect(element.querySelector('.new.section')).toBeDefined();
 
-        element = element.firstElementChild;
-        expect(element.querySelector('div[data-cq-data-path="root"][class="test-class-names"]'))
-            .toBeDefined();
-        expect(element.querySelector('div[data-cq-data-path="root/*"][class="new section aem-Parsys-newComponent"]'))
-            .toBeDefined();
-        expect(element.querySelector('div[data-cq-data-path="root/parsys/*"][class="new section aem-Parsys-newComponent"]'))
-            .toBeDefined();
     });
 
     it('should create the allowed components with the default title and no allowed component', () => {
@@ -93,12 +87,6 @@ describe('AEMParsys', () => {
         fixture.detectChanges();
 
         const element = fixture.nativeElement.firstElementChild;
-        //const titleElement = element.querySelector('.' + ALLOWED_COMPONENT_TITLE_CLASS_NAMES);
-
-        //expect(element.classList.contains(ALLOWED_PLACEHOLDER_CLASS_NAMES)).toBeTruthy();
-
-        //expect(titleElement).toBeTruthy();
-        //expect(titleElement.dataset.text).toEqual('No allowed components');
         expect(element.querySelectorAll('.aem-AllowedComponent--component.cq-placeholder.placeholder').length)
             .toEqual(0);
     });
@@ -121,12 +109,6 @@ describe('AEMParsys', () => {
         fixture.detectChanges();
 
         const element = fixture.nativeElement.firstElementChild;
-        //const titleElement = element.querySelector('.' + ALLOWED_COMPONENT_TITLE_CLASS_NAMES);
-
-        //expect(element.classList.contains(ALLOWED_PLACEHOLDER_CLASS_NAMES)).toBeTruthy();
-
-        //expect(titleElement).toBeTruthy();
-        //expect(titleElement.dataset.text).toEqual(TEST_COMPONENT_TITLE);
         expect(element.querySelectorAll('.aem-AllowedComponent--component.cq-placeholder.placeholder').length)
             .toEqual(2);
     });

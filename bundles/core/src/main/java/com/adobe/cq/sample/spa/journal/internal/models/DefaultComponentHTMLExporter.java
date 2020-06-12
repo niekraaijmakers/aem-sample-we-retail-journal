@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.request.RecursionTooDeepException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Exporter;
@@ -53,6 +54,7 @@ public class DefaultComponentHTMLExporter implements ComponentExporter {
         private SlingHttpServletResponse response;
         
         
+        
         @Override
         public String getExportedType() {
                 return "core/wcm/components/default/v1/default";
@@ -62,7 +64,7 @@ public class DefaultComponentHTMLExporter implements ComponentExporter {
         public String getHTML(){
                 try {
                         return Synthesizer.render(request.getResource(), request, response);
-                } catch (ServletException | IOException e) {
+                } catch (Exception e) {
                         LOGGER.error("Error rendering resource", e);
                         return "Error rendering resource";
                 }
