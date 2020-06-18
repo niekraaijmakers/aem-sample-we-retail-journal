@@ -1,6 +1,6 @@
 /*global process */
 
-import statsFile from '../../../../ui.apps/jcr_root/etc/we-retail-journal/clientlibs/site/stats';
+import statsFile from '../../../../ui.apps/jcr_root/apps/we-retail-journal/clientlibs/clientlib-site/resources/stats';
 
 export const webpackBuildStats = statsFile;
 
