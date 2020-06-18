@@ -63,7 +63,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.8.4",
-    "aempack": "^1.1.4",
+    "aempack": "^1.2.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -120,6 +120,7 @@
     "webpack-flush-chunks": "^2.0.3",
     "webpack-manifest-plugin": "2.0.4",
     "webpack-stats-plugin": "^0.3.1",
-    "workbox-webpack-plugin": "^4.3.1"
+    "workbox-webpack-plugin": "^4.3.1",
+    "extra-watch-webpack-plugin": "^1.0.3"
   }
 }

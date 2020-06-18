@@ -14,7 +14,7 @@ const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
-
+const ExtraWatchWebpackPlugin =  require('extra-watch-webpack-plugin');
 const getStyleLoaders = require('./styleloaders');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -286,6 +286,10 @@ module.exports = {
             fileName: 'asset-manifest.json',
             publicPath: publicPath,
         }),
+        new ExtraWatchWebpackPlugin({
+            files: [ 'src/service-worker.js' ],
+            dirs: [ ],
+        })
     ].filter(Boolean),
 
     // Some libraries import Node modules but don't use them in the browser.
