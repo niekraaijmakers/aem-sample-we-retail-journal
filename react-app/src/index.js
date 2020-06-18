@@ -13,6 +13,8 @@ import {BrowserRouter} from 'react-router-dom';
 
 import { ModelClient } from '@adobe/cq-spa-page-model-manager';
 import {PathUtils, ModelManager, Constants} from "@adobe/cq-spa-page-model-manager";
+import './registerServiceWorker';
+
 
 const model =
     window.__AEM_STATE__
@@ -30,6 +32,10 @@ const customModelClient = new ModelClient(baseUrl);
 
 const DOMReady = (f) => {/in/.test(document.readyState)?setTimeout( () => DOMReady(f),9):f()}
 
+const preloadPaths = [
+    '/content/we-retail-journal/react/en/blog/weather',
+    '/content/we-retail-journal/react/en/blog/aboutus'
+];
 
 DOMReady( () => {
     ModelManager.initialize({model: initialModel,modelClient: customModelClient}).then( (pageModel) => {
@@ -56,4 +62,13 @@ DOMReady( () => {
 
         document.body.className += ' ' + 'js';
     });
+
+    setTimeout(()=> {
+        preloadPaths.reduce( (previousPromise, nextPath) => {
+            return previousPromise.then(() => {
+                return ModelManager.getData(nextPath);
+            });
+        }, Promise.resolve());
+    }, 2000);
+
 });

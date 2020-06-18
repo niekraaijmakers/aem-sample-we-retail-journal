@@ -27,6 +27,13 @@ const computeProxyUrl = () => {
 const serverWebpackConfig = require('../config/webpack.config.server.dev');
 
 aemPack({
+    isInClientLibRoot: false,
+    serviceWorker: {
+        enabled: true,
+        name: 'service-worker.js',
+        absoluteSrcPath: paths.serviceWorkerSrcAbsolutePath,
+        absoluteDestPath: paths.serviceWorkerDestAbsolutePath
+    },
     delays: {
         postCompiledDebounceDelay: 10,
         serverSpawnDelay: 500,
