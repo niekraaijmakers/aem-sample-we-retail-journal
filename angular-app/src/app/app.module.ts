@@ -36,6 +36,7 @@ import {CarouselV1Component} from "./components/core/containers/carousel/v1/caro
 import {ContainerV1Component} from "./components/core/containers/container/v1/container.v1.component";
 import {DefaultV1Component} from "./components/core/authoring/default/v1/default.v1.component";
 import {SafeHtmlPipe} from "./pipes/safeHtml.pipe";
+import {DownloadV1Component} from "./components/core/authoring/download/v1/download.v1.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -51,6 +52,7 @@ import {SafeHtmlPipe} from "./pipes/safeHtml.pipe";
   { provide: APP_BASE_HREF, useValue: '/' } ],
   declarations: [AppComponent,
       TabsV2Component,
+      DownloadV1Component,
       AccordionV1Component,
       EditPlaceholderComponent,
       ContainerV1Component,
@@ -66,7 +68,7 @@ import {SafeHtmlPipe} from "./pipes/safeHtml.pipe";
       MainContentComponent],
     entryComponents: [
         DefaultV1Component, ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
-        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent],
+        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

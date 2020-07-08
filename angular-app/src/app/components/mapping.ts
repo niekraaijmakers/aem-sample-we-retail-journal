@@ -26,6 +26,7 @@ import {ContainerIsEmptyFn} from "./core/containers/AbstractContainerComponent";
 import {CarouselV1Component} from "./core/containers/carousel/v1/carousel.v1.component";
 import {ContainerV1Component} from "./core/containers/container/v1/container.v1.component";
 import {DefaultV1Component, DefaultV1IsEmptyFn} from "./core/authoring/default/v1/default.v1.component";
+import {DownloadV1Component, DownloadV1IsEmptyFn} from "./core/authoring/download/v1/download.v1.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -55,6 +56,7 @@ const TextEditConfig = {
     }
 };
 
+MapTo('core-components-examples/components/download')(DownloadV1Component,{emptyLabel:'DownloadV1', isEmpty:DownloadV1IsEmptyFn});
 MapTo('contrib/wcm/components/container')(ContainerV1Component,{emptyLabel:'ContainerV1', isEmpty:ContainerIsEmptyFn});
 MapTo('contrib/wcm/components/carousel')(CarouselV1Component,{emptyLabel:'CarouselV1', isEmpty:ContainerIsEmptyFn});
 MapTo('contrib/wcm/components/accordion')(AccordionV1Component, {emptyLabel:'AccordionV1', isEmpty:ContainerIsEmptyFn});

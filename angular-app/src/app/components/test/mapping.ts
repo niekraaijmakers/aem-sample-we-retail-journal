@@ -15,12 +15,11 @@
  * from Adobe Systems Incorporated.
  */
 
-import { MapTo } from "../layout/component-mapping";
+import { MapTo, AEMResponsiveGridComponent } from "@adobe/cq-angular-editable-components";
 
 import { Component1 } from "./test-comp1.component";
 import { Component2 } from "./test-comp2.component";
 import { Component3 } from "./test-comp3.component";
-import { AEMResponsiveGridComponent } from "../layout/aem-responsivegrid/aem-responsivegrid.component";
 
 MapTo("app/components/comp1")(Component1);
 MapTo("app/components/comp2")(Component2);
