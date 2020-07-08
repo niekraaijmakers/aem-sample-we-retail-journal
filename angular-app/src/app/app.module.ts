@@ -1,5 +1,5 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ~ Copyright 2018 Adobe Systems Incorporated
+ ~ Copyright 2020 Adobe Systems Incorporated
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -39,6 +39,7 @@ import {SafeHtmlPipe} from "./pipes/safeHtml.pipe";
 import {DownloadV1Component} from "./components/core/authoring/download/v1/download.v1.component";
 import {ImageV2Component} from "./components/core/authoring/image/v2/image.v2.component";
 import {SeparatorV1} from "./components/core/authoring/separator/v1/separator.v1.component";
+import {TitleV2} from "./components/core/authoring/title/v2/title.v2.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -57,6 +58,7 @@ import {SeparatorV1} from "./components/core/authoring/separator/v1/separator.v1
       DownloadV1Component,
       ImageV2Component,
       SeparatorV1,
+      TitleV2,
       AccordionV1Component,
       EditPlaceholderComponent,
       ContainerV1Component,
@@ -72,7 +74,7 @@ import {SeparatorV1} from "./components/core/authoring/separator/v1/separator.v1
       MainContentComponent],
     entryComponents: [
         DefaultV1Component, ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
-        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1],
+        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,TitleV2],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
