@@ -28,6 +28,7 @@ import {ContainerV1Component} from "./core/containers/container/v1/container.v1.
 import {DefaultV1Component, DefaultV1IsEmptyFn} from "./core/authoring/default/v1/default.v1.component";
 import {DownloadV1Component, DownloadV1IsEmptyFn} from "./core/authoring/download/v1/download.v1.component";
 import {ImageV2Component, ImageV2IsEmptyFn} from "./core/authoring/image/v2/image.v2.component";
+import {SeparatorV1} from "./core/authoring/separator/v1/separator.v1.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -57,6 +58,7 @@ const TextEditConfig = {
     }
 };
 
+MapTo('core-components-examples/components/separator')(SeparatorV1);
 MapTo('core-components-examples/components/image')(ImageV2Component,{emptyLabel:'ImageV2', isEmpty:ImageV2IsEmptyFn});
 MapTo('core-components-examples/components/download')(DownloadV1Component,{emptyLabel:'DownloadV1', isEmpty:DownloadV1IsEmptyFn});
 MapTo('contrib/wcm/components/container')(ContainerV1Component,{emptyLabel:'ContainerV1', isEmpty:ContainerIsEmptyFn});
