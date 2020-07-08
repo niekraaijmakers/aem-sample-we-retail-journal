@@ -40,6 +40,7 @@ import {DownloadV1Component} from "./components/core/authoring/download/v1/downl
 import {ImageV2Component} from "./components/core/authoring/image/v2/image.v2.component";
 import {SeparatorV1} from "./components/core/authoring/separator/v1/separator.v1.component";
 import {TitleV2} from "./components/core/authoring/title/v2/title.v2.component";
+import {TextV2} from "./components/core/authoring/text/v2/text.v2.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -59,6 +60,7 @@ import {TitleV2} from "./components/core/authoring/title/v2/title.v2.component";
       ImageV2Component,
       SeparatorV1,
       TitleV2,
+      TextV2,
       AccordionV1Component,
       EditPlaceholderComponent,
       ContainerV1Component,
@@ -74,7 +76,7 @@ import {TitleV2} from "./components/core/authoring/title/v2/title.v2.component";
       MainContentComponent],
     entryComponents: [
         DefaultV1Component, ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
-        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,TitleV2],
+        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,TitleV2,TextV2],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

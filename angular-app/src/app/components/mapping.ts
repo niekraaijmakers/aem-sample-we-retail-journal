@@ -30,6 +30,7 @@ import {DownloadV1Component, DownloadV1IsEmptyFn} from "./core/authoring/downloa
 import {ImageV2Component, ImageV2IsEmptyFn} from "./core/authoring/image/v2/image.v2.component";
 import {SeparatorV1} from "./core/authoring/separator/v1/separator.v1.component";
 import {TitleV2} from "./core/authoring/title/v2/title.v2.component";
+import {TextV2, TextV2IsEmptyFn} from "./core/authoring/text/v2/text.v2.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -59,6 +60,7 @@ const TextEditConfig = {
     }
 };
 
+MapTo('core-components-examples/components/text')(TextV2,{emptyLabel:'TextV2', isEmpty:TextV2IsEmptyFn});
 MapTo('core-components-examples/components/title')(TitleV2);
 MapTo('core-components-examples/components/separator')(SeparatorV1);
 MapTo('core-components-examples/components/image')(ImageV2Component,{emptyLabel:'ImageV2', isEmpty:ImageV2IsEmptyFn});
