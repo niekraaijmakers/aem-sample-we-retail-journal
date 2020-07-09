@@ -26,11 +26,11 @@ export function ListV2IsEmptyFn(props:ListV2Model): boolean{
 
 @Component({
     selector: 'core-list-v2',
-    templateUrl: './list.v2.component.html',
+    templateUrl: './list.v2.component.html'
 })
 export class ListV2Component extends AbstractCoreComponent implements ListV2Model{
 
-    class = 'cmp-image';
+    class = 'cmp-list';
 
     @Input() items:ListV2Item[];
     @Input() dateFormatString: string;

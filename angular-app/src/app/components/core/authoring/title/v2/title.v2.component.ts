@@ -38,7 +38,7 @@ export class TitleV2 extends AbstractCoreComponent implements TitleV2Model{
 
     @Input() text?: string;
     @Input() linkURL?: string;
-    @Input() linkDisabled: boolean;
+    @Input() linkDisabled: boolean = false;
     @Input() type: string = 'h3';
 
     get isEmpty(): boolean {

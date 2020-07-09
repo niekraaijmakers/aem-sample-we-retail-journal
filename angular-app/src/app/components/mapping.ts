@@ -32,6 +32,7 @@ import {SeparatorV1} from "./core/authoring/separator/v1/separator.v1.component"
 import {TitleV2} from "./core/authoring/title/v2/title.v2.component";
 import {TextV2, TextV2IsEmptyFn} from "./core/authoring/text/v2/text.v2.component";
 import {ListV2Component, ListV2IsEmptyFn} from "./core/authoring/list/v2/list.v2.component";
+import {TeaserV1Component, TeaserV1IsEmptyFn} from "./core/authoring/teaser/v1/teaser.v1.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -64,6 +65,7 @@ const TextEditConfig = {
 MapTo('core-components-examples/components/list')(ListV2Component,{emptyLabel:'ListV2', isEmpty:ListV2IsEmptyFn});
 MapTo('core-components-examples/components/text')(TextV2,{emptyLabel:'TextV2', isEmpty:TextV2IsEmptyFn});
 MapTo('core-components-examples/components/title')(TitleV2);
+MapTo('core-components-examples/components/teaser')(TeaserV1Component, {emptyLabel:'TeaserV1', isEmpty:TeaserV1IsEmptyFn});
 MapTo('core-components-examples/components/separator')(SeparatorV1);
 MapTo('core-components-examples/components/image')(ImageV2Component,{emptyLabel:'ImageV2', isEmpty:ImageV2IsEmptyFn});
 MapTo('core-components-examples/components/download')(DownloadV1Component,{emptyLabel:'DownloadV1', isEmpty:DownloadV1IsEmptyFn});

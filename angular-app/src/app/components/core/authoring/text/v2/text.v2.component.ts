@@ -11,7 +11,7 @@ export function TextV2IsEmptyFn(props:TextV2Model): boolean{
 }
 
 @Component({
-    selector: 'core-title-v2',
+    selector: 'core-text-v2',
     templateUrl: './text.v2.component.html',
 })
 export class TextV2 extends AbstractCoreComponent implements TextV2Model {

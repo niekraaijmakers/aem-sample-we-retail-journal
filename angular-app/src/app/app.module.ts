@@ -42,6 +42,7 @@ import {SeparatorV1} from "./components/core/authoring/separator/v1/separator.v1
 import {TitleV2} from "./components/core/authoring/title/v2/title.v2.component";
 import {TextV2} from "./components/core/authoring/text/v2/text.v2.component";
 import {ListV2Component} from "./components/core/authoring/list/v2/list.v2.component";
+import {TeaserV1Component} from "./components/core/authoring/teaser/v1/teaser.v1.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -63,6 +64,7 @@ import {ListV2Component} from "./components/core/authoring/list/v2/list.v2.compo
       TitleV2,
       TextV2,
       ListV2Component,
+      TeaserV1Component,
       AccordionV1Component,
       EditPlaceholderComponent,
       ContainerV1Component,
@@ -78,7 +80,7 @@ import {ListV2Component} from "./components/core/authoring/list/v2/list.v2.compo
       MainContentComponent],
     entryComponents: [
         DefaultV1Component, ContainerV1Component, CarouselV1Component, AccordionV1Component, TabsV2Component, TextComponent, ButtonV1Component, EditPlaceholderComponent,
-        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,TitleV2,TextV2,ListV2Component],
+        ImageComponent, WeatherComponent, NavigationComponent, MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,TitleV2,TextV2,ListV2Component, TeaserV1Component],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
