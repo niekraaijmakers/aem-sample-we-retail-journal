@@ -44,6 +44,7 @@ import {TextV2} from "./components/core/authoring/text/v2/text.v2.component";
 import {ListV2Component} from "./components/core/authoring/list/v2/list.v2.component";
 import {TeaserV1Component} from "./components/core/authoring/teaser/v1/teaser.v1.component";
 import {BreadCrumbV2Component} from "./components/core/layout/breadcrumb/v2/breadcrumb.v2.component";
+import {NavigationV1Component} from "./components/core/layout/navigation/navigation.v1.component";
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -66,6 +67,7 @@ import {BreadCrumbV2Component} from "./components/core/layout/breadcrumb/v2/brea
       TitleV2,
       TextV2,
       ListV2Component,
+      NavigationV1Component,
       TeaserV1Component,
       AccordionV1Component,
       EditPlaceholderComponent,
@@ -86,7 +88,7 @@ import {BreadCrumbV2Component} from "./components/core/layout/breadcrumb/v2/brea
         EditPlaceholderComponent, ImageComponent, WeatherComponent, NavigationComponent,
         MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,
         TitleV2,TextV2,ListV2Component, TeaserV1Component,
-        BreadCrumbV2Component],
+        BreadCrumbV2Component, NavigationV1Component],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
