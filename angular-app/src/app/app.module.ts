@@ -53,7 +53,7 @@ import {
 } from "./components/core/services/NavigationUtilityService";
 
 export interface NavigationUtilityConfig {
-    myService: Type<NavigationUtilityService>;
+    navigatonUtilityServiceImpl: Type<NavigationUtilityService>;
 }
 
 @NgModule({
@@ -110,7 +110,7 @@ export class AppModule {
             ngModule: AppModule,
             providers: [
                 ModelManagerService,{ provide: APP_BASE_HREF, useValue: '/' } ,
-                {provide: NAVIGATION_UTIL_SERVICE, useClass: config && config.myService || DefaultNavigationUtilityServiceImpl}
+                {provide: NAVIGATION_UTIL_SERVICE, useClass: config && config.navigatonUtilityServiceImpl || DefaultNavigationUtilityServiceImpl}
             ]
         };
     }
