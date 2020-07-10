@@ -46,20 +46,20 @@ export class DownloadV1Component extends AbstractCoreComponent implements Downlo
 
     @HostBinding('class') class = 'cmp-download';
 
-    @Input() titleType: string = 'h3';
-    @Input() text?: string;
-    @Input() url?: string;
-    @Input() title: string;
-    @Input() description?: string;
-    @Input() actionText?: string;
-    @Input() filename?: string;
-    @Input() format?: string;
-    @Input() size?: string;
-    @Input() extension: string;
+    @Input() titleType = 'h3';
+    @Input() text?;
+    @Input() url?;
+    @Input() title;
+    @Input() description?;
+    @Input() actionText?;
+    @Input() filename?;
+    @Input() format?;
+    @Input() size?;
+    @Input() extension;
 
-    @Input() displayFilename: boolean = false;
-    @Input() displaySize: boolean = false;
-    @Input() displayFormat: boolean = false;
+    @Input() displayFilename = false;
+    @Input() displaySize = false;
+    @Input() displayFormat = false;
     @Input() labels: DownloadV1LabelsModel = {
         filename: "File name",
         filesize: "Size",

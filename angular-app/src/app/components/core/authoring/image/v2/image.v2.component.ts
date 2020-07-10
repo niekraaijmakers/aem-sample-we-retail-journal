@@ -14,11 +14,11 @@
  *  limitations under the License.
  */
 
-import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
 import {Component, HostBinding, Input} from "@angular/core";
+import {AbstractRoutedCoreComponent, RoutedCoreComponentModel} from "../../../AbstractRoutedCoreComponent";
 
 
-export interface ImageV2Model{
+export interface ImageV2Model extends RoutedCoreComponentModel{
     src: string
     alt: string
     displayPopupTitle?: boolean
@@ -35,16 +35,15 @@ export function ImageV2IsEmptyFn(props:ImageV2Model) {
     selector: 'core-image-v2',
     templateUrl: './image.v2.component.html',
 })
-export class ImageV2Component extends AbstractCoreComponent implements ImageV2Model{
+export class ImageV2Component extends AbstractRoutedCoreComponent implements ImageV2Model{
 
     @HostBinding('class') class = 'cmp-image';
 
-    @Input() src: string;
-    @Input() alt: string;
-    @Input() displayPopupTitle?: boolean;
-    @Input() title?: string;
-    @Input() link?: string;
-
+    @Input() src;
+    @Input() alt;
+    @Input() displayPopupTitle?;
+    @Input() title?;
+    @Input() link?;
 
     get ddCssClass(): string {
         return (this.isInEditor) ? 'cq-dd-image' : '';

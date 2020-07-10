@@ -1,15 +1,30 @@
-import {Component, HostBinding, Input} from "@angular/core";
-import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
+/*
+ *  Copyright 2020 Adobe
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 
-export interface BreadCrumbV2ItemModel {
+import {Component, HostBinding, Input} from "@angular/core";
+import {AbstractRoutedCoreComponent, RoutedCoreComponentModel} from "../../../AbstractRoutedCoreComponent";
+
+export interface BreadCrumbV2ItemModel extends RoutedCoreComponentModel{
     active: boolean
     url: string
     title: string
 }
 
-export interface BreadCrumbV2Model {
+export interface BreadCrumbV2Model extends RoutedCoreComponentModel{
     items: BreadCrumbV2ItemModel[]
-    routedLinks: boolean
     ariaLabelI18n: string
 }
 
@@ -21,13 +36,12 @@ export function BreadCrumbV2IsEmptyFn(props: BreadCrumbV2Model): boolean {
     selector: 'core-breadcrumb-v2',
     templateUrl: './breadcrumb.v2.component.html'
 })
-export class BreadCrumbV2Component extends AbstractCoreComponent implements BreadCrumbV2Model {
+export class BreadCrumbV2Component extends AbstractRoutedCoreComponent implements BreadCrumbV2Model {
 
     @HostBinding('class') class = 'cmp-breadcrumb';
 
     @Input() items;
     @Input() ariaLabelI18n;
-    @Input() routedLinks = true;
 
     get isEmpty(): boolean {
         return BreadCrumbV2IsEmptyFn(this);

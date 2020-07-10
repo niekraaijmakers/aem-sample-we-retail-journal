@@ -1,5 +1,21 @@
+/*
+ *  Copyright 2020 Adobe
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 import {Component, HostBinding, Input} from "@angular/core";
-import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
+import {AbstractRoutedCoreComponent} from "../../../AbstractRoutedCoreComponent";
 
 export function TeaserV1IsEmptyFn(props:TeaserV1Model): boolean{
     return (!props.imagePath && !props.description &&  props.actions.length == 0)
@@ -7,7 +23,8 @@ export function TeaserV1IsEmptyFn(props:TeaserV1Model): boolean{
 
 export interface TeaserV1Action {
     title: string
-    URL: string;
+    URL: string
+    routed?: boolean
 }
 
 export interface TeaserV1Model{
@@ -28,7 +45,7 @@ export interface TeaserV1Model{
     selector: 'core-teaser-v1',
     templateUrl: './teaser.v1.component.html',
 })
-export class TeaserV1Component extends AbstractCoreComponent implements TeaserV1Model{
+export class TeaserV1Component extends AbstractRoutedCoreComponent implements TeaserV1Model{
 
     @HostBinding('class') class = 'cmp-teaser';
 

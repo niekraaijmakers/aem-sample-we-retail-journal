@@ -15,7 +15,7 @@
  */
 
 import {Component, HostBinding, Input} from "@angular/core";
-import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
+import {AbstractRoutedCoreComponent} from "../../../AbstractRoutedCoreComponent";
 
 export interface TitleV2Model{
     text?: string;
@@ -32,14 +32,14 @@ export function TitleV2IsEmptyFn(props:TitleV2Model): boolean{
     selector: 'core-title-v2',
     templateUrl: './title.v2.component.html',
 })
-export class TitleV2 extends AbstractCoreComponent implements TitleV2Model{
+export class TitleV2 extends AbstractRoutedCoreComponent implements TitleV2Model{
 
-    @HostBinding('class') class = 'cmp-title';
+    @HostBinding('class') @Input()  class = 'cmp-title';
 
-    @Input() text?: string;
-    @Input() linkURL?: string;
-    @Input() linkDisabled: boolean = false;
-    @Input() type: string = 'h3';
+    @Input() text?;
+    @Input() linkURL?;
+    @Input() linkDisabled = false;
+    @Input() type = 'h3';
 
     get isEmpty(): boolean {
         return TitleV2IsEmptyFn(this);

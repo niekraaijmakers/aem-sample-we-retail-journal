@@ -5,24 +5,21 @@
 </ng-template>
 
 <ng-template #componentBlock>
-    <div *ngIf="link; then linkBlock else staticBlock"></div>
-    
-    
     <div class="{{containerCssClass}}">
         <div [ngSwitch]="titleType">
-            <h1 *ngSwitchCase="h1" class="{{class}}__title">
+            <h1 *ngSwitchCase="'h1'" class="{{class}}__title">
                 <a *ngIf="url" class="{{class}}__title-link" [href]="url">{{title}}</a>
             </h1>
-            <h2 *ngSwitchCase="h2" class="{{class}}__title">
+            <h2 *ngSwitchCase="'h2'" class="{{class}}__title">
                 <a *ngIf="url" class="{{class}}__title-link" [href]="url">{{title}}</a>
             </h2>
-            <h4 *ngSwitchCase="h4" class="{{class}}__title">
+            <h4 *ngSwitchCase="'h4'" class="{{class}}__title">
                 <a *ngIf="url" class="{{class}}__title-link" [href]="url">{{title}}</a>
             </h4>
-            <h5 *ngSwitchCase="h5" class="{{class}}__title">
+            <h5 *ngSwitchCase="'h5'" class="{{class}}__title">
                 <a *ngIf="url" class="{{class}}__title-link" [href]="url">{{title}}</a>
             </h5>
-            <h6 *ngSwitchCase="h6" class="{{class}}__title">
+            <h6 *ngSwitchCase="'h6'" class="{{class}}__title">
                 <a *ngIf="url" class="{{class}}__title-link" [href]="url">{{title}}</a>
             </h6>
             <h3 *ngSwitchDefault  class="{{class}}__title">
@@ -37,11 +34,11 @@
                 <dd class="{{class}}__property-content">{{filename}}</dd>
             </div>
             <div *ngIf="isDisplayingFilesize" class="{{class}}__property {{class}}__property--size">
-                <dt class="{{class}}__property-label">{{labels.size}}</dt>
+                <dt class="{{class}}__property-label">{{labels.filesize}}</dt>
                 <dd class="{{class}}__property-content">{{size}}</dd>
             </div>
             <div *ngIf="isDisplayingFileformat" class="{{class}}__property {{class}}__property--format">
-                <dt class="{{class}}__property-label">{{labels.format}}</dt>
+                <dt class="{{class}}__property-label">{{labels.fileformat}}</dt>
                 <dd class="{{class}}__property-content">{{format}}</dd>
             </div>
         </dl>

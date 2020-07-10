@@ -29,7 +29,7 @@
 
 
 <ng-template #navigationItem let-item='item'>
-    <li ng-class="getItemCssClass(item)">
+    <li [ngClass]="getItemCssClass(item)">
         <ng-container [ngTemplateOutlet]="navigationLink" [ngTemplateOutletContext]="{item:item}"></ng-container>
         <ng-container *ngIf="!!item.children && item.children.length > 0" [ngTemplateOutlet]="navigationGroup"
                       [ngTemplateOutletContext]="{item:item}"></ng-container>
@@ -37,8 +37,8 @@
 </ng-template>
 
 <ng-template #navigationLink let-item='item'>
-    <ng-container *ngIf="isNavItemRouted(item)" [ngTemplateOutlet]="routedLink" [ngTemplateOutletContext]="{item:item}"></ng-container>
-    <ng-container *ngIf="!isNavItemRouted(item)" [ngTemplateOutlet]="staticLink" [ngTemplateOutletContext]="{item:item}"></ng-container>
+    <ng-container *ngIf="isItemRouted(item)" [ngTemplateOutlet]="routedLink" [ngTemplateOutletContext]="{item:item}"></ng-container>
+    <ng-container *ngIf="!isItemRouted(item)" [ngTemplateOutlet]="staticLink" [ngTemplateOutletContext]="{item:item}"></ng-container>
 </ng-template>
 
 

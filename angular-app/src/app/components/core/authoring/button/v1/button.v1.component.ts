@@ -14,12 +14,10 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+import {Component, EventEmitter, HostBinding, Input} from '@angular/core';
+import {AbstractRoutedCoreComponent, RoutedCoreComponentModel} from "../../../AbstractRoutedCoreComponent";
 
-import {Component, Input, Output, EventEmitter, HostBinding} from '@angular/core';
-import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
-
-
-export interface ButtonV1Model{
+export interface ButtonV1Model extends RoutedCoreComponentModel{
     text?: string;
     link?: string;
     icon?: string;
@@ -30,13 +28,13 @@ export interface ButtonV1Model{
     selector: 'core-button-v1',
     templateUrl: './button.v1.component.html',
 })
-export class ButtonV1Component extends AbstractCoreComponent implements ButtonV1Model{
+export class ButtonV1Component extends AbstractRoutedCoreComponent implements ButtonV1Model{
 
     @HostBinding('class') class = 'cmp-button';
-    @Input() text?: string;
-    @Input() link?: string;
-    @Input() icon?: string;
-    @Input() ariaLabel?: string;
+    @Input() text?;
+    @Input() link?;
+    @Input() icon?;
+    @Input() ariaLabel?;
 
     clickRequest = new EventEmitter();
 

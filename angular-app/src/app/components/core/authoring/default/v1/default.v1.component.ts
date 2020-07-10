@@ -14,10 +14,8 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-
 import {Component, HostBinding, Input} from '@angular/core';
 import {AbstractCoreComponent} from "../../../AbstractCoreComponent";
-
 
 export interface DefaultV1Model{
     html: string;
@@ -30,7 +28,7 @@ export interface DefaultV1Model{
 export class DefaultV1Component extends AbstractCoreComponent implements DefaultV1Model{
 
     @HostBinding('class') class = 'cmp-default';
-    @Input() html: string;
+    @Input() html;
 
     get isEmpty(): boolean {
         return DefaultV1IsEmptyFn(this);
