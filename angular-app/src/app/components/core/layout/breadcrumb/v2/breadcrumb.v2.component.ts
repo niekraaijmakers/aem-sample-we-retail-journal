@@ -14,10 +14,13 @@
  *  limitations under the License.
  */
 
-import {Component, HostBinding, Input} from "@angular/core";
-import {AbstractRoutedCoreComponent, RoutedCoreComponentModel} from "../../../AbstractRoutedCoreComponent";
+import {Component, HostBinding, Inject, Input} from "@angular/core";
+import {AbstractRoutedCoreComponent} from "../../../AbstractRoutedCoreComponent";
+import {NAVIGATION_UTIL_SERVICE, NavigationUtilityService} from "../../../services/NavigationUtilityService";
+import {NavigationItemModel} from "../../../model/NavigationItemModel";
+import {RoutedCoreComponentModel} from "../../../model/RoutedCoreComponentModel";
 
-export interface BreadCrumbV2ItemModel extends RoutedCoreComponentModel{
+export interface BreadCrumbV2ItemModel extends NavigationItemModel{
     active: boolean
     url: string
     title: string
@@ -39,15 +42,23 @@ export function BreadCrumbV2IsEmptyFn(props: BreadCrumbV2Model): boolean {
 export class BreadCrumbV2Component extends AbstractRoutedCoreComponent implements BreadCrumbV2Model {
 
     @HostBinding('class') class = 'cmp-breadcrumb';
+    navigationUtilService: NavigationUtilityService;
 
     @Input() items;
     @Input() ariaLabelI18n;
+
+    constructor(@Inject(NAVIGATION_UTIL_SERVICE) navigationUtilService: NavigationUtilityService) {
+        super();
+        this.navigationUtilService = navigationUtilService;
+    }
 
     get isEmpty(): boolean {
         return BreadCrumbV2IsEmptyFn(this);
     }
 
     getItemCssClass(item: BreadCrumbV2ItemModel): string {
-        return item.active ? this.class + '__item ' + this.class + '__item--active' : this.class + '__item';
+        return this.navigationUtilService.isItemActive(item) ? this.class + '__item ' + this.class + '__item--active' : this.class + '__item';
     }
+
+
 }

@@ -14,19 +14,19 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 import './components/mapping';
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { APP_BASE_HREF } from '@angular/common';
-import { AngularWeatherWidgetModule, WeatherApiName } from 'angular-weather-widget';
-import { AppComponent } from './app.component';
-import { SpaAngularEditableComponentsModule } from '@adobe/cq-angular-editable-components';
-import { ModelManagerService } from './components/model-manager.service';
-import { TextComponent } from './components/text/text.component';
-import { ImageComponent } from './components/image/image.component';
-import { WeatherComponent } from './components/weather/weather.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { MenuComponent } from './components/navigation/menu/menu.component';
-import { MainContentComponent } from './components/main-content/main-content.component';
+import {BrowserModule, BrowserTransferStateModule} from '@angular/platform-browser';
+import {ModuleWithProviders, NgModule, Type} from '@angular/core';
+import {APP_BASE_HREF} from '@angular/common';
+import {AngularWeatherWidgetModule, WeatherApiName} from 'angular-weather-widget';
+import {AppComponent} from './app.component';
+import {SpaAngularEditableComponentsModule} from '@adobe/cq-angular-editable-components';
+import {ModelManagerService} from './components/model-manager.service';
+import {TextComponent} from './components/text/text.component';
+import {ImageComponent} from './components/image/image.component';
+import {WeatherComponent} from './components/weather/weather.component';
+import {NavigationComponent} from './components/navigation/navigation.component';
+import {MenuComponent} from './components/navigation/menu/menu.component';
+import {MainContentComponent} from './components/main-content/main-content.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ButtonV1Component} from "./components/core/authoring/button/v1/button.v1.component";
 import {EditPlaceholderComponent} from "./components/core/editplaceholder/editplaceholder.component";
@@ -45,6 +45,16 @@ import {ListV2Component} from "./components/core/authoring/list/v2/list.v2.compo
 import {TeaserV1Component} from "./components/core/authoring/teaser/v1/teaser.v1.component";
 import {BreadCrumbV2Component} from "./components/core/layout/breadcrumb/v2/breadcrumb.v2.component";
 import {NavigationV1Component} from "./components/core/layout/navigation/navigation.v1.component";
+import {LanguageNavigationV1Component} from "./components/core/layout/language-navigation/v1/language-navigation.v1.component";
+import {
+    DefaultNavigationUtilityServiceImpl,
+    NAVIGATION_UTIL_SERVICE,
+    NavigationUtilityService
+} from "./components/core/services/NavigationUtilityService";
+
+export interface NavigationUtilityConfig {
+    myService: Type<NavigationUtilityService>;
+}
 
 @NgModule({
   imports: [ BrowserModule.withServerTransition({ appId: 'we-retail-sample-angular' }),
@@ -56,8 +66,10 @@ import {NavigationV1Component} from "./components/core/layout/navigation/navigat
     }),
     AppRoutingModule,
     BrowserTransferStateModule ],
-  providers: [ ModelManagerService,
-  { provide: APP_BASE_HREF, useValue: '/' } ],
+  providers: [
+      ModelManagerService,{ provide: APP_BASE_HREF, useValue: '/' } ,
+      {provide: NAVIGATION_UTIL_SERVICE, useClass: DefaultNavigationUtilityServiceImpl}
+  ],
   declarations: [AppComponent,
       TabsV2Component,
       DownloadV1Component,
@@ -68,6 +80,7 @@ import {NavigationV1Component} from "./components/core/layout/navigation/navigat
       TextV2,
       ListV2Component,
       NavigationV1Component,
+      LanguageNavigationV1Component,
       TeaserV1Component,
       AccordionV1Component,
       EditPlaceholderComponent,
@@ -88,8 +101,18 @@ import {NavigationV1Component} from "./components/core/layout/navigation/navigat
         EditPlaceholderComponent, ImageComponent, WeatherComponent, NavigationComponent,
         MainContentComponent, DownloadV1Component,ImageV2Component,SeparatorV1,
         TitleV2,TextV2,ListV2Component, TeaserV1Component,
-        BreadCrumbV2Component, NavigationV1Component],
+        BreadCrumbV2Component, NavigationV1Component,LanguageNavigationV1Component],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {}
+export class AppModule {
+    static forRoot(config?: NavigationUtilityConfig): ModuleWithProviders {
+        return {
+            ngModule: AppModule,
+            providers: [
+                ModelManagerService,{ provide: APP_BASE_HREF, useValue: '/' } ,
+                {provide: NAVIGATION_UTIL_SERVICE, useClass: config && config.myService || DefaultNavigationUtilityServiceImpl}
+            ]
+        };
+    }
+}
 

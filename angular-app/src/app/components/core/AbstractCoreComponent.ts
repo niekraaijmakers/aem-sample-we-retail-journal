@@ -16,11 +16,7 @@
 
 import {MappedComponentProperties} from "./common";
 import {Input} from "@angular/core";
-
-export interface CoreComponentModel {
-    hidePlaceHolder: boolean
-    isInEditor:boolean
-}
+import {CoreComponentModel} from "./model/CoreComponentModel";
 
 /**
  * AbstractCoreComponent

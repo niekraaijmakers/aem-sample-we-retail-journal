@@ -14,10 +14,15 @@
  *  limitations under the License.
  */
 
-import {Component, HostBinding, Input} from "@angular/core";
-import {AbstractRoutedCoreComponent, RoutedCoreComponentModel} from "../../AbstractRoutedCoreComponent";
+import {Component, HostBinding, Inject, Input} from "@angular/core";
+import {AbstractRoutedCoreComponent} from "../../AbstractRoutedCoreComponent";
+import {BreadCrumbV2ItemModel} from "../breadcrumb/v2/breadcrumb.v2.component";
+import {Route} from "@angular/router";
+import {RoutedCoreComponentModel} from "../../model/RoutedCoreComponentModel";
+import {NavigationItemModel} from "../../model/NavigationItemModel";
+import {NAVIGATION_UTIL_SERVICE, NavigationUtilityService} from "../../services/NavigationUtilityService";
 
-export interface NavigationV1Item extends RoutedCoreComponentModel{
+export interface NavigationV1Item extends NavigationItemModel{
     level: number,
     active: boolean,
     title: string,
@@ -43,18 +48,35 @@ export function NavigationV1IsEmptyFn(props:NavigationV1Model): boolean{
     templateUrl: './navigation.v1.component.html'
 })
 export class NavigationV1Component extends AbstractRoutedCoreComponent implements NavigationV1Model {
-    @HostBinding('class') class = 'cmp-title';
+
+    @HostBinding('class') class = 'cmp-navigation';
+
+    navigationUtilService: NavigationUtilityService;
 
     @Input() items: NavigationV1Item[];
     @Input() accessibilityLabel;
+
+    constructor(@Inject(NAVIGATION_UTIL_SERVICE) navigationUtilService: NavigationUtilityService) {
+        super();
+        this.navigationUtilService = navigationUtilService;
+    }
 
     get isEmpty(): boolean {
         return NavigationV1IsEmptyFn(this);
     }
 
+
     getItemCssClass(item:NavigationV1Item):string{
-        const active:string = item.active ? ` ${this.class}__item--active`: '';
+        const active:string = this.isItemActive(item) ? ` ${this.class}__item--active`: '';
         const level:string = ` ${this.class}__item--level-${item.level}`;
         return `${this.class}__item${active}${level}`;
+    }
+
+    /**
+     * You may overrule this method to determine for example based on current URL / page context whether the item is active.
+     * @param item
+     */
+    isItemActive(item:BreadCrumbV2ItemModel):boolean{
+        return this.navigationUtilService.isItemActive(item);
     }
 }

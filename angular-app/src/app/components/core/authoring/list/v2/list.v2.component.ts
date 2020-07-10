@@ -15,7 +15,8 @@
  */
 
 import {Component, Input} from "@angular/core";
-import {AbstractRoutedCoreComponent, RoutedCoreComponentModel} from "../../../AbstractRoutedCoreComponent";
+import {AbstractRoutedCoreComponent} from "../../../AbstractRoutedCoreComponent";
+import {RoutedCoreComponentModel} from "../../../model/RoutedCoreComponentModel";
 
 export interface ListV2Item extends RoutedCoreComponentModel{
     url?:string

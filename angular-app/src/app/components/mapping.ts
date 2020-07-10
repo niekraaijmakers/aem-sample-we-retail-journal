@@ -35,6 +35,7 @@ import {ListV2Component, ListV2IsEmptyFn} from "./core/authoring/list/v2/list.v2
 import {TeaserV1Component, TeaserV1IsEmptyFn} from "./core/authoring/teaser/v1/teaser.v1.component";
 import {BreadCrumbV2Component, BreadCrumbV2IsEmptyFn} from "./core/layout/breadcrumb/v2/breadcrumb.v2.component";
 import {NavigationV1Component, NavigationV1IsEmptyFn} from "./core/layout/navigation/navigation.v1.component";
+import {LanguageNavigationV1Component} from "./core/layout/language-navigation/v1/language-navigation.v1.component";
 
 /**
  * Default Edit configuration for the Image component that interact with the Core Image component and sub-types
@@ -64,7 +65,7 @@ const TextEditConfig = {
     }
 };
 
-
+MapTo('core-components-examples/components/languagenavigation')(LanguageNavigationV1Component,{emptyLabel:'LanguageNavigationV1', isEmpty:NavigationV1IsEmptyFn});
 MapTo('core-components-examples/components/navigation')(NavigationV1Component,{emptyLabel:'NavigationV1', isEmpty:NavigationV1IsEmptyFn});
 MapTo('core-components-examples/components/breadcrumb')(BreadCrumbV2Component,{emptyLabel:'BreadCrumbV2', isEmpty:BreadCrumbV2IsEmptyFn});
 MapTo('core-components-examples/components/list')(ListV2Component,{emptyLabel:'ListV2', isEmpty:ListV2IsEmptyFn});
